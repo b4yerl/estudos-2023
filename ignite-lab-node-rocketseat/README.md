@@ -111,3 +111,186 @@ Importamos então do class-validator um @IsNotEmpty()
 Por padrão o Nest não valida as requisições para não acoplar coisas que deixariam a aplicação lenta, o que devemos fazer é adicionar um app.useGlobalPipes(new ValidatonPipe()) antes do listen lá no main.ts.
 
 Agora ao invés de um 500 internal server error, devemos ter um 400 Bad Request se tentarmos passar um campo vazio, a vantagem agora é sabermos exatamente qual é o problema.
+
+### Aula 02 - Domínio, casos de uso e regras de negócio - Ignite Lab Node.js
+#### Design de Software
+
+Design de software é o processo em que arquitetamos como as coisas vão funcionar, as regras de negócio, casos de uso, etc.
+/* Lembra do RF, RNF e Restrições? */
+
+A ideia passada aqui é a de "pensar na aplicação desconexa de qualquer meio externo". Quando iniciamos uma aplicação podemos começar pensando em banco de dados, logo de cara, quando a ideia aqui na aula é que a aplicação funcione independente de qualquer coisa. Dessa forma o banco de dados passa a ser visto apenas como ferramenta para persitência de dados e não como responsável ou algo que vá interferir no funcionamento da aplicação.
+
+Normalmente enxergamos as nossas tabelas como entidades, para sair disso podemos ver nossas entidades como classes da OOP. No contexto da nossa aplicação de notificações podemos ver nossa entidade principal, as notificações, como uma classe e posteriormente nos preocupamos com a integração disso ao banco de dados.
+
+##### Organização da aplicação
+
+Dentro do src/ abrimos duas novas pastas, "application" e "infra". Na pasta infra/ teremos tudo que é externo, tudo relacionado a camadas externas como banco de dados, conexão com outras apis, rotas http, tudo que nos conecta com o mundo exterior vai pra infra/.
+Todo o resto, tudo que é independente da camada externa vai pro application/, como nossas entities/ por exemplo.
+
+#### Entidade de Notificação
+
+Na construção da nossa classe de notificação seguimos inicialmente os conceitos de encapsulamento, ou seja, nossos atributos estão privados, dessa forma devemos criar getters e setters para trabalhar com esses atributos. A vantagem do uso de métodos get e set é o papel deles como middleman, que traz para nós a flexibilidade de uma validação por exemplo, ou simplesmente de esconder do "exterior" o que apenas nossa entidade deve ter conhecimento.
+
+##### Getters / Setters
+
+No JS podemos usar o prefixo "get" e o "set" na assinatura do método, mas não podemos repetir o nome dos atributos, no entanto existe uma saída para isso.
+Podemos criar uma interface com nossos atributos e ao invés de declarar nossos atributos na classe separadamente, nós aplicamos a interface tipo: 
+> private props: NotificationProps;
+Agora podemos chamar nossos getters e setters pelo nome dos atributos já que eles internamente estarão definindo valores para
+> this.props.content
+O nosso constructor também pode simplesmente receber um argumento tipo NotificationProps e settar props de uma vez.
+
+/* Aí vai de saber até onde isso vale né, as vezes um getContent fica mais bunitim */
+
+Outro atributo pra nossa interface vai ser o readAt:
+> readAt?: Date | null;
+Repare que o ? indica que o readAt é opicional, ou seja ela pode ser do tipo Date ou undefined. Por isso a importância do pipe, ele indica ali que alé dos 2 tipos anteriores, também pode ser null.
+Quando geramos uma notificação podemos ter uma data de leitura ou não, nesse caso quando não temos readAt é undefined.
+O null entra na brincadeira quando queremos atualizar uma notificação e remover o valor de readAt, o undefined é o equivalente de remover o readAt em si, enquanto o null é o envio de um valor vazio, mantendo o readAt vivo e sorridente.
+
+Note que, apesar dessa nossa entidade ser igual a nossa tabela, isso não é uma regra, uma entidade pode ser mais de uma tabela e enfim.
+
+##### Value Objects
+
+O conceito de Value Objects vem do DDD, sendo aplicado a atributos nos quais eu queira algum tipo de funconamento específico dentro daquele atributo.
+
+Começamos com uma classe para o nosso content, sim, podemos chamar o arquivo só de content.ts e caso comece a ficar bagunçado podemos criar uma pasta com o nome da entidade em questão.
+
+A ideia aqui é fazermos toda operação relacionada ao nosso content de forma isolada la na classe Content, dessa forma não poluímos a nossa entidade Notification com validações, formatações e afins, relacionados a Content.
+
+Essa ideia de value objects não é obrigatória, mas é algo muito interessante para fins de organização de tudo, isolando melhor o código, podendo isolar também os testes, facilitando a manutenção :)
+
+#### JEST
+
+##### Introdução a testes
+
+Quando falamos de testes unitários, estamos falando de testar cada pedacinho da nossa aplicação, portanto, sim ´pdemos começar a pensar nos primeiros testes agora.
+
+Neste momento nossa aplicação já cria um objeto de Notificação e já valida seu conteúdo pela quantidade de caracteres.
+
+Pra início arrancamos a parte do Jest lá do package.json e passamos para um arquivo separado, o jest.config.ts.
+
+Então começamos com um teste pro nosso content no arquivo
+> content.spec.ts
+
+No fim das contas criamos nesse arquivo 3 testes dentro de 2 modelos diferentes, mas que no fim tem uma mesma ideia por trás.
+> test('Nome do nosso teste', () => { <br>
+>   expect('Algo que se espera').toFazerAlgumaCoisa(); <br>
+> })
+Sendo que em um modelo usamos uma variável que foi checada com .toBeTruthy() e no outro tivemos uma arrow function com .toThrow().
+
+O legal é que estamos pensando em testes desde o início da aplicação independente da metodolia (tdd) e talz.
+
+##### Organização dos testes
+
+No Jest, existe algo que podemos aplicar, o describe(), nele podemos categorizar nossos testes que dentro dele estiverem.
+
+Outra mudança que podemos fazer é trocar a keyword test() por it(), facilitando uma leitura dieta do teste.
+
+##### Replace helper
+
+Quando tentamos criar uma notificação pro teste nos deparamos com um problema. É exigido que passemos uma data pro createdAt, o problema é, quando a notificação é criada, não queremos informar o createdAt e para isso existem algumas soluções.
+
+A ideia na verdade é mostrar que no constructor a presença do createdAt não é obrigatória, apenas no instanciamento da classe.
+
+Aqui é utilizado um helper, o Replace.ts
+> export type Replace<T, R> = Omit<T, keyof R> & R;
+Estamos então ex´prtando o tipo Replace, uma helper function do TS, passando um tipo original e o tipo a ser replaced/opicional
+
+Dá uma olhada lá no notification.ts como ficou esse replace, não vou passar pra cá kkkkkkkkk
+
+#### Casos de uso da aplicação
+
+Casos de usos são as funcionalidades da nossa aplicação, a forma como o usuário interage com a aplicação, guess what, services. Partimos então pra criação do primeiro RF da aplicação.
+
+##### send-notification.ts
+
+Na hora de nomear essa funcionalidade, tenta sair um pouco do CRUD e busca um nome que realmente representa aquilo que está sendo feito pelo "user" da funcionalidade, nesse caso uma notificação deve ser enviada.
+
+Antes de criarmos nossa classe de enviar notificações temos duas interfaces, a primeira contém aquelas informações básicas necessárias para o envio da notificação. A segunda interface tem apenas a função de transformar o nosso return em um objeit, carregando um único atributo do tipo Notification.
+
+/* Lembra lá da ideia de interface e implementação do livro de OOP? Pois bem, com essa interface Response, podemos alterar o que tem neça sem nos preocuparmos em alterar os que a usam. */
+
+A nossa classe tem apenas um método, ela recebe a interface de request e retorna a Promise do objeto de SendNotificationResponse. Ou seja recebemos a informação e criamos a notificação.
+
+Com isso já podemos criar um teste send-notification.spec.ts, por enquanto podemos testar se a notificação pode ser criada, mas isso já havia sido feito antes.
+
+A partir de agora perceberemos que os casos de uso são o ponto central da nossa aplicação e aqui é que começarão as conexões com camadas de persistência de dados, api externa, envio de email, conexão com o mundo externo.
+
+Nesse nosso caso aqui, futuramente vamos querer persistir essas notificações criadas em um banco de dados.
+
+##### Repository pattern
+
+O repository pattern é um intermédio entre a nossa aplicação e a camada de persistência. Então as classes, as funcionalidades que fazem a comunicação entre banco de dados e aplicação são os repositórios. São eles que recebem as chamadas do caso de uso e salvam os arquivos no banco.
+
+Agora por que isso? Um exemplo seria, em caso de troca do banco, não é necessário sair alterando todos os arquivos que com ele se comunicam. Outro ponto aqui é a aplicação do principio de inversão de dependência visto lá atras, tendo as interfaces e as implementações variadas.
+
+Criamos então o notifications-repository.ts, nosso amigo aí é um contrato, ele não implementa nada. Por questões do Nest (injeção de dependencia) e por ele lidar melhor com classes abstratas do que com interfaces, vamos de classe abstrata.
+
+Após feita esse contrato, criamo um construtor pra nossa funcionalidade SendNotification passando o repository como um atributo private. Tendo esse atributo podemos chamar
+> await this.notificationsRepository.create(notification)
+Vamos ver agora um erro no nosso teste, porque o nosso .create() não está implementado ainda, para resolver isso momentaneamente podemos implementar apenas um console.log(notification).
+
+Vemos então que, não é o nosso caso de uso que diz como a notificalçao vais er persistida, não é ele mesmo, estamos invertendo a ordem das coisas, é quem chama que diz como essa persistência ocorre, inversão de dependência.
+
+Poderíamos trocar esse console.log() por um .push() pra dentro de um array, que simularia o db, e no teste checar o array pra .toHaveLength(1), essa ideia de desacoplamento de camadas nos permite ir testando a aplicação a medida que a desenvolvemos sem que haja uma dependência de uma tabela pra isso.
+
+Isso nos leva paaaraaaa.........
+
+##### Banco de dados em memória
+
+Que é basicamente o que já estamos fazendo aqui, um "armazenamento" temporário dessas informações até que a aplicação seja reiniciada.
+Para fins de organização o que vamos fazer é transportar essa ideia de implementação e array do nosso teste para um arquivo separado.
+
+Podemos trazer o array como um atributo público da nossa classe InMemoryNotificationsRepository.
+
+Um ponto para se atentar é com o caminho das importações.
+
+Enfim, agora podemos instanciar um objeto pro no In memory database já dentro do teste.
+
+#### Juntando as pontas
+
+##### Repositório do Prisma
+
+Chegou a hora de juntar as pontas dessa aula com a aula 1 e fazer a paradinha funcionara realmente.
+
+Antes de tudo vamos organizar a pasta infra/. Criamos 2 novas pastas, uma pra cada parte da nossa infra, database/ e http/.
+Dentro de http/ temos a pasta controllers/ e dtos/. DTO, ou Data Transfer Object, é exatamente o que o nosso create-notification-body.ts é xD.
+
+Separamos os modules em 2, http/hhtp.module.ts e database/database.module.ts, fica agora a cargo do app.module.ts fazer esses dois imports.
+
+Outra separação que podemos fazer é uma pasta prisma dentro da database/, aqui entra tudo que está relacionado ao Prisma, dessa forma facilitando a manutenção em caso de troca de ORM.
+
+Enfim podemos criar o prisma-notifications-repository.ts, uma classe que implementa o nosso NotificationsRepository, recebendo no seu construtor um atributo do tipo PrismaService.
+
+O método async create tem um
+>await this.prismaService.notifications.create({data: {...}})
+Basta então passar os dados no modelo
+>prop = notification.getProp
+
+Quanto ao id da notificação existem duas maneiras, gerar o id pelo banco ou pela aplicação. Aqui vamos gerar pela aplicação, dessa forma mesmo antes de persistirmos essa entidade no banco já saberemos seu id e poderemos utiliza-lo para outras operações.
+
+Para isso vamos utilizar a função randomUUID() que será importada do node:crypto e um atributo private _id: string, lá no nosso notification.ts.
+
+Ao criarmos o get pro nosso _id podemos nomea-lo apenas como public get id :)
+
+##### notifications.controller.ts e Injeção
+
+Com o repositório pronto, voltamos a nossa controller e injetamos o nosso caso de uso com um construtor. A questão é que aqui no Nest, para que nosso use-case seja injetável, temos que colocar o decorator @Injectable() lá na classe. Estamos então gerando um acoplamento do código ao framework que até então não havia.
+
+Para que essa injeção seja possível, também devemos passar o nosso use-case (service) como um provider lá no http.module.ts
+
+##### Vai rodar?
+
+Precisamos de alguns ajustes no dabase.module e no http.module. Começando pelo database.module, precisamos informar aqui que quando o PrismaService pedir NotificationsRepository a classe a ser usada é a PrismaNotificationsRepository. Outra coisa necessária aqui é o export do NotificationsRepository para que lá no http.module, o SendNotification possa usar.
+No http.module basta importarmos o DatabaseModule.
+
+Por fim foi necessário passar o @Injectable() lá no nosso prisma repo também.
+
+##### Teste coverage
+
+E no final de tudo isso, nossos testes ainda são independentes do banco graças ao in memory database.
+
+Mas ainda tem uma coisa bacana no Nest.Js, o npm run test:cov. O teste coverage gera um relatório dos nossos teste unitários, podemos dessa forma ver o que nossos testes unitários estão cobrindo e o que falta cobrir, o que passou e o que falhou, etc.
+
+Repare que você não deve/precisa cobrir 100% da aplicação, por exemplo nossos getters e setters aqui não tem nenhuma regra de negócio, portanto não há necessidade de testar isso.

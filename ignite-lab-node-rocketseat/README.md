@@ -294,3 +294,198 @@ E no final de tudo isso, nossos testes ainda são independentes do banco graças
 Mas ainda tem uma coisa bacana no Nest.Js, o npm run test:cov. O teste coverage gera um relatório dos nossos teste unitários, podemos dessa forma ver o que nossos testes unitários estão cobrindo e o que falta cobrir, o que passou e o que falhou, etc.
 
 Repare que você não deve/precisa cobrir 100% da aplicação, por exemplo nossos getters e setters aqui não tem nenhuma regra de negócio, portanto não há necessidade de testar isso.
+
+### Aula 03 - Infraestrutura e injeção de dependências - Ignite Lab Node.js
+
+Socorro... que ideia de fazer isso kkkkkkkkkkk MAAAASSSS bora lá, ta quase acabando, depois eu reviso tudo e volto pro começo. A sensação é que eu comecei o Node.Js pelo ep.5 da temporada 3...
+
+#### Typescript paths
+
+Na última aula em algumas importações tivemos que lidar com caminhos muito longos tipo "../../../../", existe solução pra isso, no caso podemos criar alias para esses caminhos dentro do tsconfig.json, na parte de compilerOptions.
+
+Com a chave paths, passamos um objeto no qual as chaves representam o nosso alias e o valor o caminho ao qual apontam:
+> "@pathExample/*": ["./src/pathExample/*"]
+Entenda que a ideia não é trocar todas as importações, arquivos próximos podem ter lá o seu ../, o problema são as aberrações mesmo.
+
+#### Mappers
+
+Muito utilizado em arquiteturas com multiplas camadas o mapper desacopla o map de uma entidade de forma a ser reaproveitado pelas camadas corresondentes.
+
+Na nossa aplicação, a entidade Notificação é vista de forma diferente pelas camadas, para a application ela é uma classe, para o database uma tabela, para o http podemos formatar aquele retorno. Cada um tratou diferente a nossa entidade.
+
+O processo que traduz a entidade para o "data" lá no PrismaNotificationsRepository é o mapping. Esse mapping teria que ser feito a cada novo método da nossa classe, por isso isolamos esse tratamento como uma classe desacoplada do PrismaNotificationsRepository.
+
+Nossa classe então tem únicamente uma função static, dessa forma não é necessário instanciá-la, que recebe uma entidade Notification e retorna o objeto do nosso "data" lá. As simple as that.
+
+Esse é o mapper, agora já temos a formatação pronta na forma que o Prisma necessita dela e esse conceito pode ser aplicado em outras frentes, por exemplo no return do nosso método lá no http.controller, podemos levar aquilo pra um mapper caso formos utilizar dessa formatação mais vezes.
+
+#### Cancelar a notificação
+
+Começamos criando o arquivo do nosso caso de uso, ele basicamente começou como um copy/paste do outro caso de uso. Algumas mudanças são feitas nas interfaces de request e response. Nosso request agora basta ter o id da notificação, pois este será utilizado para buscar a notificação alvo.
+
+Nesse momento é necessário que o nosso NotificationsRepository tenha a assinatura de um método que recebe o id de uma notificação e retorna a Promise <notificação ou nulo>.
+
+Caso o retorno seja nulo, ou seja, notificação não encontrada podemos disparar um erro. Aqui podemos lançar um erro genérico que aparecerá em outros casos de uso e, porque não, separar esse erro em uma pasta errors, como sendo uma classe que extende o Error.
+
+Agora devemos alterar o schema do Prisma, adicionando um campo igual ao readAt. Nós até poderíamos ter um isCanceled de boolean, mas o canceledAt nos permite não só saber se foi cancelado, mas quando isso aconteceu.
+Com o schema atualizado basta rodar um novo
+> npx prisma migrate dev
+
+Agora devemos atualizar a interface de props da nossa entidade Notification e adicionar um getter pro nosso novo atributo.
+Note que não definiremos um setter, até porque não faz sentido, a data de cancelamento não deve ser settada pelo usuário, nem a data de leitura e nem a de criação. Ao invés disso teremos um método cancel() que simplesmente setta nosso atributo para a data atual.
+
+Agora no NotificationsRepository precisamos de um método save() que recebe a nossa notificação e retorna void.
+
+Com tudo pronto podemos passat no terminal um comando
+> npx tsc --noEmit
+Esse comando simples vai checar nossa aplicação sem gerar os arquivos de build, assim podemos verificar quais são os erros existentes gerados pelas alterações feitas e onde eles estão
+
+##### Testes do cancel-notification.ts
+
+Podemos começar nosso teste copiando o arquvo de teste do send-notification e alterando-o.
+Devemos então criar um notificação, dar um create nela lá no nosso in memory database e só então podemos passar o cancel() e checar no expect.
+
+Com a criação dos alias lá no tsconfig.json, temos alguns problemas aqui no Jest.
+Lá no tsconfig temos que adicionar um "resolveJsonModule", dessa forma poderemos importar arquivos json nas configs do Jest.
+Com essa alteração feita podemos dar três imports lá no jest.config.ts
+>import {Config} from 'jest' <br>
+>import {pathsToModuleNameMapper} from 'ts-jest' <br>
+>import {compilerOptions} from './tsconfig.json'
+Com isso feito podemos passar o nosso export defaul lá pra baixo, exportando a const config: Config.
+
+Dentro das configs do jest o que vai mudar é a adição de uma chave:
+>moduleNameMapper: pathsToModuleNameMapper(compilerOptions.path, {prefix: '<roorDir>/'})
+Jesus...
+
+Com isso feito basta implementarmos nossos 2 novos métodos lá no InMemoryNotificationsRepository e os testes devem passar.
+
+Partindo então pra implementação de outro teste, nosso código deve retornar o NotificationNotFound se tentarmos apagar uma notificação com id falso.
+Podemos testar isso passando a função dentro do expect() e espeando um .rejects. Lembre que uma promise ou resolve ou rejects algo e nesse caso além disso deve .toThrow(NotificationNotFound).
+
+#### Contagem de notificações
+
+Novamente criamos um arquivo para o use-case, copiamos do cancel, colamaos e alteramos os nomes. Agora quanto as duas interfaces, o request tem um recipientId e o response volta a ser um,a interface com count: number.
+
+Com os ajustes necessários vamos à nossa classe abstrata de NotificationsRepository e adicionamos um método countManyByRecipientId que recebe o recipientId e retorna uma promise<number>
+
+##### Teste da contagem de notificações
+
+Podemos tomar como base o arquivo de testes do cancel, alterando aquilo que seja necessário pra essa adaptação. Indo ao InMemoryNotificationsRepository temos que implementar o novo método que apenas retorna:
+>this.notificationsList.filter((notification) => notification.recipientId == recipientId).length;
+
+Tendo isso feito basta terminar de escrever o teste, aqui iremos criar 3 novas notificações para 2 recipients diferentes, chamaremos a função retornando o resultado em um {count} e o expect checa o valor de count.
+
+##### Factory pattern
+
+Factory pattern nada mais é do que a criação de uma função que retorna um objeto, dessa forma podemos abstrair a criação de objetos repetidos como uma linha de produção mesmo.
+
+Aqui usaremos essa ideia pra diminuir o código do nosso teste. Criamos então uma factory, ou seja uma função que retorna uma nova notificação criada, podemos simplesmente trazer o código do teste pra ser o nosso return.
+
+Lembre que haverão casos em que deveremos alterar alguns campos dessa notificação padrão, para isso vamos permitir como argumento um override do tipo Override, esse tipo será definido como um Partial<NotificationProps>.
+
+#### Listagem por recipient
+
+Esse service é muito parecido com o nosso count-recipient-notifications, a diferença maior aqui está provavelmente no retorno. Nossa interface de response aqui deve conter uma lista de Notification.
+
+Vamos então ao nosso NotificationsRepository fazer o contrato desse método, para que assim possamos utilizá-lo no nosso use-case.
+
+E tá pronto o sorvetinho, bora dar um pulo lá no InMemoryNotificationsRepository para implementar esse novo método e podermos partir para os testes. Aqui podemos copiar a implementação do count só que sem o length.
+
+##### Teste da listagem por recipient
+
+Podemos começar com o teste do count como base, mas aqui a graça vai vir no expect. Serão 2 expect(), o primeiro padrão, .toHaveLength(), mas no segundo podemos brincar com as capacidades do Jest.
+Aqui teremos algo como:
+>expect(notifications).toEqual(expect.arrayContaining([ <br>
+>  expect.objectContaining({recipientId: 1}), <br>
+>  expect.objectContaining({recipientId: 1}) <br>
+> ]))
+Traduzindo, esperamos que o notifications seja um array com 2 objetos que tenham o recipientId esperado.
+
+#### Ler notificação
+
+A mesma lógica do cancel, então ele servirá como base pro nosso read-notification.ts. Lembra da questão dos setters para os atributos de canceledAt, readAt e createdAt? Pois bem, substituímos o set do readAt por um método read() que define o this.props.readAt como new Date().
+
+Aproveitemos que aqui já estamos e já pode criar um novo método para "desler" a notificação, ou seja, agora é o momento em que editamos esse valor para voltar a notificação para o status de não lida.
+
+##### Teste do read-notification.ts
+
+Advinha, basta copia também o teste do cancel e mudar os nomes pra read, o ponto que fica claro cada vez mais é que pela aplicação ter sido bem estruturada, fica tranquilo fazer essa adaptação entre os use-cases com poucas alterações necessárias.
+
+##### Unread
+
+Cara, você sabe o que fazer né, pro teste também, próóóximo!!!
+
+#### Implementando repositório do Prisma
+
+Pois é, chegamos aqui e até agora nada disso está funcional a nível do usuário final. Tudo foi feito de forma independente e rodando na camada de testes unitários.
+
+Agora é implementar isso no PrismaNotificationsRepository e na parte de controller, nas rotas.
+
+##### findById()
+
+Bora lá aqui basicamente vamos passar para uma variável notification a nossa busca lá dentro do banco, para isso pedimos um
+>await this.prismaService.notification.finUnique({where:{id: notificationId}})
+Essa linha simples e amigável vai fazer nossa query e retornar o notification, maaaaaaas, lembra que a mesma entidade aparece de forma diferente a depender da camada? Pois bem, esse notification é o notification do prisma e não a nossa classe da camada de aplicação, portanto se nós tinhamos um mapper toPrisma, chegou a hora de ter o toDomain()
+
+Pra começar devemos importar o Notification do @prisma/client e renomeá-lo para que não tenha o mesmo nome da outra
+>import {Notification as RawNotification} from '@prisma/client'
+
+O retorno do nosso método é um Notification com todos os dados, todos, incluindo o id e isso requer uma pequena alteração no constructor da classe Notification, é adicionado um segundo argumento opcional "id?: string", que entra como "this._id = id ?? randomUUID()".
+
+##### countManyByRecipientId()
+
+Tranquilo aqui, só mesmo pegar um
+>await this.prismaService.notification.count({where:{recipientId}})
+E retornar o valor.
+
+##### save()
+
+Aqui usaremos o PrismaNotificationMapper.toPrisma() igual no create e na sequência daremos um update, where id: raw.id e o data: raw.
+
+##### findManyByRecipientId()
+
+A mesma ideia do count, porém com um findMany() pra gerar a lista. Já pro return agora podemos passar um .map() com a função .toDomain(), dessa forma todas nossas notificações passarão a ser uma Notification da camada de aplicação.
+
+#### Rotas HTTP
+
+Bora lá pro notifications.controller.ts criar os métodos HTTP que vão lidar com esses nossos casos de uso.
+
+Começamos listando quais serão os métodos necessários aqui.
+
+##### cancel()
+
+Nosso cancel vai com o método @Patch, a escolha pelo Patch é pela natureza da ação, uma alteração muito específica em uma informação da nossa notificação.
+
+Aqui precisamos de um parâmetro de id pra saber qual notificação estamos alterando, por fim nosas rota será
+> @Post(':id/cancel')
+Pra pegar esse id e usar ele como parâmetro no Nest.Js também usa-se um decorator, o @Param, a assinatura do método então fica
+> async cancel(@Param('id') id: string)
+
+Lembre que para usar o CancelNotification, devemos trazer ele lá no construtor. Daí já podemos executar direto nosso cancel
+
+##### read() e unread()
+
+Podemos terminar de importar todas as nossas dependências e então basta copiar o cancel() aqui pro read() e pro unread().
+
+##### countFromRecipient()
+
+Partindo pras rotas que tem retorno, começamos com essa do tipo @Get. A parte de rota e @Param segue a mesma ideia das outras.
+
+/* Comentário aqui no 1:20 sobre a criação de mais controllers, inicialmente separando a parte de recipient por exemplo */
+
+Beleza basicamente executamos passando o valor pra {count} que será retornado posteriormente.
+
+##### getFromRecipient()
+
+Além da rota sem o count, a outra diferença aqui será o uso do mapper pra formatar a notification de um jeito legal com o .toHTTP() via .map()
+
+E é isso, basta agora passar os outros use-cases lá no providers do http.module e fim.
+
+### Conclusão
+
+Enfim, terminados esses 3 dias cansativos, pesados, MUITA coisa nova que posteriormente deverá ser revisitada para uma revisão melhor, para uma absorção melhor.
+
+Talvez eu tenha ido pra frente de mais pra alguém que nunca tinha feito uma aplicação de backend, mas estou satisfeito de não ter ficado boiando. Agora é voltar umas casinhas e pegar os fundamentos la da base.
+
+See you space cowbow...
+

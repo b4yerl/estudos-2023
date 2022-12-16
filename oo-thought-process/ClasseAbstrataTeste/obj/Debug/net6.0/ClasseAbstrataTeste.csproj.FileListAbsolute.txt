@@ -1,0 +1,15 @@
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/bin/Debug/net6.0/ClasseAbstrataTeste
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/bin/Debug/net6.0/ClasseAbstrataTeste.deps.json
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/bin/Debug/net6.0/ClasseAbstrataTeste.runtimeconfig.json
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/bin/Debug/net6.0/ClasseAbstrataTeste.dll
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/bin/Debug/net6.0/ClasseAbstrataTeste.pdb
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.csproj.AssemblyReference.cache
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.GeneratedMSBuildEditorConfig.editorconfig
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.AssemblyInfoInputs.cache
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.AssemblyInfo.cs
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.csproj.CoreCompileInputs.cache
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.dll
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/refint/ClasseAbstrataTeste.dll
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.pdb
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ClasseAbstrataTeste.genruntimeconfig.cache
+/home/b4yerl/workspace/estudos/csharp/oo-thought-process/ClasseAbstrataTeste/obj/Debug/net6.0/ref/ClasseAbstrataTeste.dll

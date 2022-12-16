@@ -136,14 +136,17 @@ Na construção da nossa classe de notificação seguimos inicialmente os concei
 No JS podemos usar o prefixo "get" e o "set" na assinatura do método, mas não podemos repetir o nome dos atributos, no entanto existe uma saída para isso.
 Podemos criar uma interface com nossos atributos e ao invés de declarar nossos atributos na classe separadamente, nós aplicamos a interface tipo: 
 > private props: NotificationProps;
+
 Agora podemos chamar nossos getters e setters pelo nome dos atributos já que eles internamente estarão definindo valores para
 > this.props.content
+
 O nosso constructor também pode simplesmente receber um argumento tipo NotificationProps e settar props de uma vez.
 
 /* Aí vai de saber até onde isso vale né, as vezes um getContent fica mais bunitim */
 
 Outro atributo pra nossa interface vai ser o readAt:
 > readAt?: Date | null;
+
 Repare que o ? indica que o readAt é opicional, ou seja ela pode ser do tipo Date ou undefined. Por isso a importância do pipe, ele indica ali que alé dos 2 tipos anteriores, também pode ser null.
 Quando geramos uma notificação podemos ter uma data de leitura ou não, nesse caso quando não temos readAt é undefined.
 O null entra na brincadeira quando queremos atualizar uma notificação e remover o valor de readAt, o undefined é o equivalente de remover o readAt em si, enquanto o null é o envio de um valor vazio, mantendo o readAt vivo e sorridente.
@@ -177,6 +180,7 @@ No fim das contas criamos nesse arquivo 3 testes dentro de 2 modelos diferentes,
 > test('Nome do nosso teste', () => { <br>
 >   expect('Algo que se espera').toFazerAlgumaCoisa(); <br>
 > })
+
 Sendo que em um modelo usamos uma variável que foi checada com .toBeTruthy() e no outro tivemos uma arrow function com .toThrow().
 
 O legal é que estamos pensando em testes desde o início da aplicação independente da metodolia (tdd) e talz.
@@ -195,6 +199,7 @@ A ideia na verdade é mostrar que no constructor a presença do createdAt não �
 
 Aqui é utilizado um helper, o Replace.ts
 > export type Replace<T, R> = Omit<T, keyof R> & R;
+
 Estamos então ex´prtando o tipo Replace, uma helper function do TS, passando um tipo original e o tipo a ser replaced/opicional
 
 Dá uma olhada lá no notification.ts como ficou esse replace, não vou passar pra cá kkkkkkkkk
@@ -229,6 +234,7 @@ Criamos então o notifications-repository.ts, nosso amigo aí é um contrato, el
 
 Após feita esse contrato, criamo um construtor pra nossa funcionalidade SendNotification passando o repository como um atributo private. Tendo esse atributo podemos chamar
 > await this.notificationsRepository.create(notification)
+
 Vamos ver agora um erro no nosso teste, porque o nosso .create() não está implementado ainda, para resolver isso momentaneamente podemos implementar apenas um console.log(notification).
 
 Vemos então que, não é o nosso caso de uso que diz como a notificalçao vais er persistida, não é ele mesmo, estamos invertendo a ordem das coisas, é quem chama que diz como essa persistência ocorre, inversão de dependência.
@@ -265,7 +271,9 @@ Enfim podemos criar o prisma-notifications-repository.ts, uma classe que impleme
 
 O método async create tem um
 >await this.prismaService.notifications.create({data: {...}})
+
 Basta então passar os dados no modelo
+
 >prop = notification.getProp
 
 Quanto ao id da notificação existem duas maneiras, gerar o id pelo banco ou pela aplicação. Aqui vamos gerar pela aplicação, dessa forma mesmo antes de persistirmos essa entidade no banco já saberemos seu id e poderemos utiliza-lo para outras operações.
@@ -305,6 +313,7 @@ Na última aula em algumas importações tivemos que lidar com caminhos muito lo
 
 Com a chave paths, passamos um objeto no qual as chaves representam o nosso alias e o valor o caminho ao qual apontam:
 > "@pathExample/*": ["./src/pathExample/*"]
+
 Entenda que a ideia não é trocar todas as importações, arquivos próximos podem ter lá o seu ../, o problema são as aberrações mesmo.
 
 #### Mappers
@@ -338,6 +347,7 @@ Agora no NotificationsRepository precisamos de um método save() que recebe a no
 
 Com tudo pronto podemos passat no terminal um comando
 > npx tsc --noEmit
+
 Esse comando simples vai checar nossa aplicação sem gerar os arquivos de build, assim podemos verificar quais são os erros existentes gerados pelas alterações feitas e onde eles estão
 
 ##### Testes do cancel-notification.ts
@@ -351,10 +361,12 @@ Com essa alteração feita podemos dar três imports lá no jest.config.ts
 >import {Config} from 'jest' <br>
 >import {pathsToModuleNameMapper} from 'ts-jest' <br>
 >import {compilerOptions} from './tsconfig.json'
+
 Com isso feito podemos passar o nosso export defaul lá pra baixo, exportando a const config: Config.
 
 Dentro das configs do jest o que vai mudar é a adição de uma chave:
 >moduleNameMapper: pathsToModuleNameMapper(compilerOptions.path, {prefix: '<roorDir>/'})
+
 Jesus...
 
 Com isso feito basta implementarmos nossos 2 novos métodos lá no InMemoryNotificationsRepository e os testes devem passar.
@@ -399,6 +411,7 @@ Aqui teremos algo como:
 >  expect.objectContaining({recipientId: 1}), <br>
 >  expect.objectContaining({recipientId: 1}) <br>
 > ]))
+
 Traduzindo, esperamos que o notifications seja um array com 2 objetos que tenham o recipientId esperado.
 
 #### Ler notificação
@@ -425,6 +438,7 @@ Agora é implementar isso no PrismaNotificationsRepository e na parte de control
 
 Bora lá aqui basicamente vamos passar para uma variável notification a nossa busca lá dentro do banco, para isso pedimos um
 >await this.prismaService.notification.finUnique({where:{id: notificationId}})
+
 Essa linha simples e amigável vai fazer nossa query e retornar o notification, maaaaaaas, lembra que a mesma entidade aparece de forma diferente a depender da camada? Pois bem, esse notification é o notification do prisma e não a nossa classe da camada de aplicação, portanto se nós tinhamos um mapper toPrisma, chegou a hora de ter o toDomain()
 
 Pra começar devemos importar o Notification do @prisma/client e renomeá-lo para que não tenha o mesmo nome da outra
@@ -436,6 +450,7 @@ O retorno do nosso método é um Notification com todos os dados, todos, incluin
 
 Tranquilo aqui, só mesmo pegar um
 >await this.prismaService.notification.count({where:{recipientId}})
+  
 E retornar o valor.
 
 ##### save()
@@ -458,7 +473,9 @@ Nosso cancel vai com o método @Patch, a escolha pelo Patch é pela natureza da 
 
 Aqui precisamos de um parâmetro de id pra saber qual notificação estamos alterando, por fim nosas rota será
 > @Post(':id/cancel')
+
 Pra pegar esse id e usar ele como parâmetro no Nest.Js também usa-se um decorator, o @Param, a assinatura do método então fica
+
 > async cancel(@Param('id') id: string)
 
 Lembre que para usar o CancelNotification, devemos trazer ele lá no construtor. Daí já podemos executar direto nosso cancel

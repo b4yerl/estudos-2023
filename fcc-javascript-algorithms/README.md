@@ -6,3 +6,4 @@ Este curso é dividido em <b>x</b> módulos que foram divididos aqui por arquivo
 ## [ES6](./es6.md)
 ## [Regular Expressions](./regex.md)
 ## [Debugging](./debugging.md)
+## [Basic Data Structures](./basicDataStructures.md)

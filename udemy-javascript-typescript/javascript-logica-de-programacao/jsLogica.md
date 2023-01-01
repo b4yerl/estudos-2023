@@ -1,12 +1,12 @@
 # Javascript - Lógica de Programação
 
 ## Extensões VSCode
-	> Code Runner
-	> Code Time
-	> Git Graph > olha depois
-	> StardadJS > olha depois
-	> Dracula Official > tema
-	> Material icon Theme
+- Code Runner
+- Code Time
+- Git Graph > olha depois
+- StardadJS > olha depois
+- Dracula Official > tema
+- Material icon Theme
 
 ## Operadores de Comparação
 
@@ -65,8 +65,25 @@ Cada vez que rodarmos esse código, um novo objeto com todas as informações de
 
 Um simples .toString já nos permite exibir esse horário de forma completa e legível já que o Date() é contado em milésimos de segundos a partir de 1/1/1970.
 
-Sendo assim podemos passar como argumento na hora de instanciar nosso objeto, valores em milésimos de segundos, ou podemos passar ano e mês, pelo menos, separados por vírgula.
+Sendo assim podemos passar como argumento na hora de instanciar nosso objeto, valores em milésimos de segundos fazendo operações para encontrar o resultado esperado.
 
-Existem vários getters no nosso objeto do tipo Date, podemos então pedir um get para cada atributo como .getFullYear, .getDate, .getMonth, por exemplo. Lembre que a contagem dos meses começa do 0
+Para instanciar o objeto na data desejada, podemos passar todos os parâmetros pro nosso timestamp, seguindo a ordem (lembrando que o mês é indexado por 0):
+> const data = new Date(yyyy, MM, dd, hh, mm, ss, ms)
+
+Outro ponto interessante é que se "transbordarmos" o parâmetro (65 segundos por exemplo) a função construtora corrige isso.
+
+Além de branco (data atual), valor em ms e os parâmetros isolados, o Date() também aceita uma string que siga uma modelo 'yyy-MM-dd' ou 'yyyy-MM-dd hh:mm:ss', esse formato por string deve ser o mais comum.
+
+Existem vários getters para o objeto de data, seguindo a ordem já descrta temos:
+- data.getFullYear()
+- data.getMonth() (indexado por 0)
+- data.getDate()
+- data.getHours()
+- data.getMinutes()
+- data.getSeconds()
+- data.getMilliseconds()
+- data.getDay() (dia da semana indexado por 0)
+
+
 
  

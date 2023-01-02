@@ -84,6 +84,88 @@ Existem vários getters para o objeto de data, seguindo a ordem já descrta temo
 - data.getMilliseconds()
 - data.getDay() (dia da semana indexado por 0)
 
+## Mais diferenças entre let e var
 
+Uma coisa a se notar é que a variável var, diferente de let, pode ser redeclarada
+> var nome = 'João';
+> var nome = 'José';
 
+O código acima roda sem problema '-'. O lance é que let tem escopo de bloco, então poderíamos ter 2 varíaveis declaradas com o mesmo identificador desde que em blocos diferentes.
+
+Essa questão do escopo talvez seja a maior diferença entre var e let. Para let, qualquer {} representa um bloco e o escopo lá dentro e pah. Jaá pra var esse escopo aṕenas se apresenta na separação de funções.
  
+Um escopo consegue olha o seu entorno pra buscar coisas de dentro pra fora, o que não vale pra busca de fora do escopo pra dentro.
+
+Outra coisa acontece tanto com var quanto com function, o HOISTING. O que acontece, quando executamos um código JS, ele faz a elevação da declaração de variáveis. Note que não é elevação da atribuição de valores e sim da declaração. 
+
+Pras funções o hoisting ocorre só quando há o uso da keyword function, quando criamos uma variável const e atribuimos a função a ela, o hoisting não ocorre.
+
+## Atribuição via desestruturação de Arrays e Objetos
+
+Jogo rápido aqui, isso foi feito lá atrás quando invertemos o valor de variáveis com:
+> [x, y] = [y, x]
+
+O lance é que esse tipo de atribuição de valor busca o valor armazenado nos index do array a direita que batam com os da esquerda, logo o código abaixo armazenaria 66 e 03:
+> const [primeiroTitulo, segundoTitulo] = ['66', '03', '13', '14'];
+
+Pra pegar o resto do array poderíamos passar uma variável pra ser um novo array, usando o Rest Operator, mais sobre isso [aqui](../../fcc-javascript-algorithms/es6.md).
+
+Para objetos usamos algo parecido, mas seguindo as seguintes possibilidades:
+> const { propriedade } = objeto;
+> const { propriedade: minhaVariavel } = objeto;
+
+Novamente, já vimos isso lá no [fcc](../../fcc-javascript-algorithms/es6.md).
+
+Podemos criar valores padrão também aqui na atribuição por desestruturação
+> const { invalid: variável = 'não existe' } = objeto;
+
+Para objetos aninhados podemos usar a atribuição da seguinte forma:
+> const { objetinho: { propriedade: prop = 'x' } } = objetão
+
+## for classicão
+
+Por mais que eu já esteja cansado de ver aulas e de usar o for, vou aproveitar o espaço pra reescrever algumas coisas kkkkk.
+
+Dentro do for precisamos basicamente de 3 coisas para controlar o nosso loop:
+- Uma variável de controle (para)
+- Uma condição (enquanto)
+- E uma atualização
+
+Dessa maneira o forzão clássico é apresentado como:
+> for(let controle; condição; atualiza controle)
+
+A volta do laço segue a seguinte lógica: define a variável de controle -> checa a condição -> executa o código -> atualiza -> checa a condição -> executa o código -> e por aí vai
+
+## DOM e a DOM tree
+
+O Document Object Model é o que rege as coisas no browser. No topo da cadeia temos o window, seguido pelo document. Dentro do window.document é onde encontramos todo o nosso html.
+
+A partir daí já exploramos a DOM tree, os childs de document são head e body por exemplo, document por sua vez é child de window e a lógica segue.
+
+Quando nosso código chama um document.método estamos usando a API do DOM para interagir com a página no browser.
+
+## for...in
+
+Além do for clássico, temos outras formas de criar laços de repetição para iterar por arrays e objetos, o for...in
+> for (let index in arr)
+
+Veja então que no for...in pegamos o index no caso de arrays e as chaves nos objetos.
+
+## for...of
+
+O for of é específico para iteráveis (strings, arrays, etc). Ele lembra muito o foreach lá do C# se não me engano, basicamente entramos com
+> for (let value of arr)
+
+Diferente do for...in, o for...of já retorna o valor pra variável e não o index.
+
+Note então que para objetos, a única possibilidade de iterar por ele é o for...in.
+
+## forEach()
+
+O forEach() aqui no javascript é um método do objeto Array que recebe uma função como parâmetro.
+
+Essa função por sua vez recebe de 1 a 3 elementos no argumento, sendo eles: O valor do loop atual, o índice e o array completo.
+
+Mais pra frente voltaremos ao forEach
+
+## Exercício - HTML Collections e node list

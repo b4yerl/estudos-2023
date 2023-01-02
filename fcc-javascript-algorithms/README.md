@@ -7,3 +7,4 @@ Este curso é dividido em <b>x</b> módulos que foram divididos aqui por arquivo
 ## [Regular Expressions](./regex.md)
 ## [Debugging](./debugging.md)
 ## [Basic Data Structures](./basicDataStructures.md)
+## [Basic Algorithms Scripting](./basicAlgorithms.md)

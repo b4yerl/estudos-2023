@@ -9,3 +9,4 @@ Este curso é dividido em <b>x</b> módulos que foram divididos aqui por arquivo
 ## [Basic Data Structures](./basicDataStructures.md)
 ## [Basic Algorithms Scripting](./basicAlgorithms.md)
 ## [Object Oriented Programming](./oop.md)
+## [Functional Programming](./functionalProgramming.md)

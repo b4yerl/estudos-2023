@@ -13,3 +13,7 @@ Na sequência o programa solicitado deveria receber um número em formato decima
 ## [Caesar's Cipher](./projects/caesarsCipher.js)
 
 O mais fácil dos 3 primeiros desafios. Basicamente o código deve decodificar uma string em [ROT13](https://pt.wikipedia.org/wiki/ROT13) retornando a string resultado.
+
+## [Telephone Number Validator](./projects/telephoneCheck.js)
+
+Talvez o mais simples de se entender o que deveria ser feito, o mais conciso em número de linhas, mas a dificuldade imposta por esse desafio está justamente na habilidade necessária para cobrir todas as possibilidades com ReGex.

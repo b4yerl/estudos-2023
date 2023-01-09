@@ -11,3 +11,4 @@ Este curso é dividido em <b>x</b> módulos que foram divididos aqui por arquivo
 ## [Object Oriented Programming](./oop.md)
 ## [Functional Programming](./functionalProgramming.md)
 ## [Intermediate Algorithms](./intermediateAlgorithms.md)
+## [Final Projects](./projects.md)

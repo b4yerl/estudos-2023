@@ -1,6 +1,12 @@
-# Javascript Algorithms and Data Structures - Free Code Camp
+# Javascript Algorithms and Data Structures
 
 Este curso é dividido em <b>10</b> módulos que foram divididos aqui por arquivos .md
+
+<div align="center">
+  <br><br>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/FreeCodeCamp_logo.svg/2560px-FreeCodeCamp_logo.svg.png" height="50px">
+  <br><br>
+</div>
 
 ## [Basic Javascript](./basicJavascript.md)
 ## [ES6](./es6.md)
@@ -13,8 +19,7 @@ Este curso é dividido em <b>10</b> módulos que foram divididos aqui por arquiv
 ## [Intermediate Algorithms](./intermediateAlgorithms.md)
 ## [Final Projects](./projects.md)
 
-<div align="center" style="margin-top: 50px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" height="50px" style="margin-right: 20px;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/FreeCodeCamp_logo.svg/2560px-FreeCodeCamp_logo.svg.png" height="50px">
-  
+<div align="center">
+  <br><br>
+  <img src="https://logodownload.org/wp-content/uploads/2022/04/javascript-logo-1.png" height="250px">
 </div>

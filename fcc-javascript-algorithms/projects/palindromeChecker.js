@@ -26,4 +26,5 @@ function stringCleaner(str) {
 
   return loweredArr;
 }
+
 isPalindrome('racecar');

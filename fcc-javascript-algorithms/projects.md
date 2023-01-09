@@ -17,3 +17,7 @@ O mais fácil dos 3 primeiros desafios. Basicamente o código deve decodificar u
 ## [Telephone Number Validator](./projects/telephoneCheck.js)
 
 Talvez o mais simples de se entender o que deveria ser feito, o mais conciso em número de linhas, mas a dificuldade imposta por esse desafio está justamente na habilidade necessária para cobrir todas as possibilidades com ReGex.
+
+## [Cash Register](./projects/cashRegister.js)
+
+Esse talvez foi o mais chatinho com várias indas e vindas nas ideias, mas no final o resultado está satisfatório, faltando só alguns detalhes pra ficar 100% perfeito, por enquanto fiz uma gambiarra pra funcionar de forma OK

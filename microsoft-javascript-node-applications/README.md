@@ -6,6 +6,7 @@
 
 ## [Intro to Node.js](./introToNode.md)
 ## [Create a new Node.js project and work with dependencies](./newProjectAndDependencies.md)
+## [Interactively debug Node.js apps with the built-in and Visual Studio Code debuggers](./debugger.md)
 
 <div align="center">
   <br><br>

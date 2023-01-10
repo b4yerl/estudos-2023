@@ -85,7 +85,7 @@ O padrão de semantic versioning é e deve ser seguido quando temos a versão de
 Para a atualização de um pacote podemos usar
 > npm update \<package-name>@\<optional-version>
 
-O segundo argumento ali é opcional, usamos quando queremos uma versão específica do pacote, caso não haja nada é instalada a versão mais recente.
+O segundo argumento ali é opcional, usamos quando queremos uma versão específica do pacote, podemos simplesmente mandar um @latest.
 
 Podemos também ditar como as atualizações serão feitas atrave´s do package.sjon:
 - x.0.0 ou *1.0.0 para atualizar automaticamente até em Majors

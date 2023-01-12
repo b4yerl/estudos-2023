@@ -91,4 +91,11 @@ O [typeConversion.go](./examples/typeConversion.go) traz exemplos e notas quanto
 
 Daqui pra frente vou pensar se continuo linkando código e comentando o código, ou se deixo tudo aqui em .md mesmo.
 
-### Recendo input do terminal
+### Recendo input do terminal com os.Args
+
+Começaremos explorando o package "os", ele nos permite interagir com o sistema operacional. Para receber o input do usuário precisamos conversar com o sistema operaginal.
+
+No pacote 'os' temos a variável "Args", um slice de strings, que o Go pega da linha de comando quando o programa é executado. Slices são as estruturas que armazenam vários valores em Go.
+> var Args []string
+
+Importante notar que Args[0] sempre vai ser o path para o programa, em "go run main.go hello", em Args[0] teremos main.go.

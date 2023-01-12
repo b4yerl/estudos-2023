@@ -1,0 +1,27 @@
+[
+  {
+    "code": 1,
+    "role": "Analista",
+    "wage": "9.0"
+  },
+  {
+    "code": 2,
+    "role": "Contador",
+    "wage": "22.50"
+  },
+  {
+    "code": 3,
+    "role": "Escrituário",
+    "wage": "3.2"
+  },
+  {
+    "code": 4,
+    "role": "Dev",
+    "wage": "10.0"
+  },
+  {
+    "code": 5,
+    "role": "Gerente",
+    "wage": "20.0"
+  } 
+]

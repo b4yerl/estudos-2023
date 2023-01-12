@@ -169,3 +169,57 @@ Essa função por sua vez recebe de 1 a 3 elementos no argumento, sendo eles: O 
 Mais pra frente voltaremos ao forEach
 
 ## Exercício - HTML Collections e node list
+
+Quando usamos o querySelectorAll para pegar a referência a uma coleção de elementos HTML, o retorno é uma NodeList, que se comporta de maneira muito similar a um Array, mas é um NodeList.
+
+Podemos selecionar e armazenar o style de um elemento da DOM em uma variável, para isso usamos o getComputedStyle()
+
+## while e do while
+
+Normalmente usamos for quando sabemos qual será o nosso limite, quantas vezes iremos iterar, ou quando não temos uma condição interativa.
+
+Para esses casos partimos para os while, com a diferença que o while padrão checa a condição antes de entrar no laço, já o do...while executa ao menos uma vez o código e só depois checa a condição.
+
+## Break e continue
+
+Dentro de um laço de repetição podemos controlar seu fluxo de repetição com as keywords break e continue.
+- break: quebra o laço de repetição e retorna para a execução natural do código saindo do bloco.
+- continue: permite pular para a próxima iteração, assim podemos por exemplo adicionar um desvio condicional para pular uma iteração.
+
+## try, catch, throw
+
+Quando sabemos que algo no programa pode lançar um erro tratamos isso com o bloco try catch. O bloco try indica um código que o programa tentará executar, caso isso dispare um erro, o fluxo é jogado para o bloco catch(err) recebendo o erro.
+
+Não é interessante deixar o usuário ver o erro do programa, além de prejudicar a experiência do usuário, alguém vendo informações internas do nosso código é algo potencialmente inseguro.
+
+Além disso podemos disparar nossos próprios erros. Para isso usamos algo como:
+> throw('Mensagem do erro aqui'); // ou
+> throw new Error('Mensagem do erro aqui');
+
+Podemos tratar nossos próprios erros com o try catch, e assim eliminar as informações do erro lançado. Essa questão de segurança é válida principalmente pro frontend
+
+Além do try catch, podemos adicionar o bloco finally, um bloco que sempre será executado independente de ter erro ou não.
+
+## setInterval() e setTimeout()
+
+O setInterval nos permite configurar um intervalo de tempo no qual queremos que uma função fique sendo executada:
+> const timer = setInterval(relogio, 1000);
+
+Podemos usar clearInterval() passando nosso interval para parar o processo.
+
+Outra opção é o setTimeout(), este executa o nosso código uma vez após esperar o período de tempo pedido.
+> const autoDestroy = setTimeout(explodeBase, 60000);
+
+## Criando uma lista de tarefas
+
+Podemos capturar o evento keypress para o momento do click de uma tecla em determinado local. Esse evento tem propriedades como keyCode que nos permitem especificar e identificar as teclas pressionadas.
+
+Com a ideia de parent e child abrimos mais formas de manipular a DOM.
+
+A solução para salvar as tarefas começou com ele iterando pela NodeList do querySelectorAll('li') e com replace() e trim() filtrando apenas o nome da tarefa de dentro do innerText que foi então passada para um array.
+
+Com o array contendo o nome das tarefas, ele utilizou o JSON.stringify() para usar habilitar o possibilidade de salvar fácil essa string no localStorage e posteriormente converter de volta.
+
+A volta basta usar o JSON.parse() e chamar a função que cria os li dentro de um for...of
+
+Agora vou refazer o [código](./exercicios/taskList/js/taskListRefactor.js) tentando usar tudo visto nessa aula.

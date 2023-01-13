@@ -99,3 +99,28 @@ No pacote 'os' temos a variável "Args", um slice de strings, que o Go pega da l
 > var Args []string
 
 Importante notar que Args[0] sempre vai ser o path para o programa, em "go run main.go hello", em Args[0] teremos main.go.
+
+Quando usamos go run, o path do Args[0] será um caminho temporário, enquanto com go build gera um path permanente para o nosso executável.
+
+>  Uma quebra rápida aqui pra falar do go build. Usando a flag -o podemos passar um nome pro nosso programa, assim compilando ele na mesma pasta atual:
+>> go build -o hello
+
+ Lembrando o python, aqui no Go temos a função len() que retorna o tamanho do slice:
+ > len(os.Args)
+
+ ### Raw string literal
+
+ Asim como em Javascript podemos digitar uma string entre acentos graves, entretanto isso caracteriza um raw string literal.
+
+ Uma das diferenças entre uma string literal e uma raw string literal é a possibilidade de escrever em múltplas linhas sem a necessidade de usar \n ou \t por exemplo.
+
+Isso pode ser muito útil para códigos com muitos escape characters e com formatações.
+
+### Length of a string
+
+Podemos sim usar len(string) para extrair o tamanho de uma string, entretanto isso retorna quantos bytes tem a string, o problema disso é que para caracteres unicode, "não americanos", são necessários 2 bytes, um "Ç" por exemplo.
+
+Então para realmente contar caracteres usaremos a função RuneCountInString do package "unicode/utf8". Agora sim poderemos ver um valor mais confiável.
+> utf8.RuneCountInString(string)
+
+### IOTA

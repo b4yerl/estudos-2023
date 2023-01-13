@@ -8,6 +8,7 @@
 ## [Create a new Node.js project and work with dependencies](./newProjectAndDependencies.md)
 ## [Interactively debug Node.js apps with the built-in and Visual Studio Code debuggers](./debugger.md)
 ## [Work with files and directories in a Node.js app](./filesAndDirectories.md)
+## [Build a web API with Node.js and Express](./webApi.md)
 
 <div align="center">
   <br><br>

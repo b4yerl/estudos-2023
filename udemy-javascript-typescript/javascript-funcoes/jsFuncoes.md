@@ -61,4 +61,20 @@ Entramos nesse assunto para começar a introduzir o uso do this. No caso de util
 
 Para tornar nosso método um getter, basta colocar a keyword "get" na frente da sua declaração. Da mesma forma podemos criar um setter tendo inclusive o mesmo nome do getter.
 
-### Criando calculadora com factory functions
+### Constructor functions
+
+Na função construtora utilizamos PascalCase para sua nomeação. Quando declaramos propriedades e métodos dentro de um Constructor, usamos sempre o this.
+
+Podemos usar const ou let, para criar uma variável disponível apensas dentro do constructor privando do acesso externo posterior.
+
+### Funções geradoras
+
+Funções geradoras possuem um recurso especial chamado lazy evaluation, para declarar uma utilizamos:
+> function* nomeFunction() {};
+
+Em funções geradoras ao invés do return, utilizamos yield. Esse yield gera retornos em objeto. Para acessar esses valores devemos utilizar o .next(), assim receberemos um objeto com 2 chaves:
+> { value: valorRetornadoAtual, done: boolean }
+
+O done serve para conttolar o fim dos 'yield' da nossa função geradora.
+
+Essa geradora que armazenamos em uma variável pode ser iterado por um for...of por exemplo e irá retornar todos os seus valores.

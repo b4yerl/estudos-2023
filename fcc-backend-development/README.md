@@ -7,6 +7,8 @@
 </div>
 
 ## [Managing Packages with NPM](./managingPackages.md)
+## [Basic Node.js and Express](./basicNodeExpress.md)
+## [MongoDB and Mongoose](./mongodbMongoose.md)
 
 <div align="center">
   <br><br>

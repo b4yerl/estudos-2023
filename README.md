@@ -14,3 +14,4 @@ Esse repositório tem como objetivo organizar os meus estudos durante 2023. Assi
 ## Outros livros
 - ### [The Object-Oriented Thought Process - Matt Weisfeld](./oo-thought-process/)
 - ### [Algoritmos - Lógica para Desenvolvimento... - José Augusto Manzano](./algoritmos-logica-manzano)
+- ### [A Common-Sense Guide To Algorithms And Data Structures - Jay Wengrow](./common-sense-ds-algo-wengrow/)

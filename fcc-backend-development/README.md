@@ -10,6 +10,6 @@
 
 <div align="center">
   <br><br>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/1280px-Node.js_logo_2015.svg.png" height="50px">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/1280px-Node.js_logo_2015.svg.png" height="100px">
   <br><br>
 </div>

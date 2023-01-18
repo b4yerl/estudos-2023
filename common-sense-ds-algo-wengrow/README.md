@@ -4,3 +4,4 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 
 ## [Why Data Structures Matters?](./whyDsMatters.md)
 ## [Why Algorithms Matters?](./whyAlgosMatters.md)
+## [O Yes! Big O Notation](./bigONotation.md)

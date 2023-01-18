@@ -57,6 +57,8 @@ Lógico que a escolha por um algoritmo depende do que pretende-se fazer com a ap
 
 ## Exercises
 
+#### Página 34
+
 1. 4
 2. 1
 3. Considerando que a eficiência da busca binária é o log de N na base 2, temos então um máximo de 17 passos.

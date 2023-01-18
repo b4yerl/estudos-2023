@@ -46,3 +46,21 @@ Podemos também adicionar uma foreign key com:
 > ALTER TABLE 'tabela' ADD COLUMN 'nome' TYPE
 > REFERENCES 'outraTabela'('colunaQueAponta');
 
+Outra opção quando criamos tabelas é passar já na criação as colunas que queremos com
+> CREATE TABLE tabela(coluna TYPE CONSTRAINT);
+
+Aqui na tabela sounds estamos vendo uma relação "one-to-many", quando um personagem pode ter váris sons, mas os sons não podem ter vários personagens, tendo cada som apenas 1 foreign key.
+
+Agora veremos a relação "many-to-many", normalmente para ligar 2 tabelas com esse tipo de relação nós utilizamos uma junction table.
+
+A junction table terá 2 colunas como FOREIGN KEYS, esssas coluna vão ligar os 2 id relacionados na mesma linha e então teremos uma COMPOSITE KEY, ou seja, uma PRIMARY KEY compost da combinação dos 2 valores.
+
+Para finalizar essa etapa vamos dar um join para ver os dados linkado através de uma foreign key.
+> SELECT colunas FROM tabela1 FULL JOIN tabela2 ON
+> tabela1.colunaPrimaryKey = tabela2.colunaForeignKey;
+
+Já quando a relação é many-to-many o JOIN ficaria algo assim:
+> SELECT colunas FROM junction
+> FULL JOIN tabela1 ON junction.colunaForeignKey = tabela1.colunaPrimaryKey
+> FULL JOIN tabela2 ON junction.colunaForeignKey = tabela2.colunaPrimaryKey;
+> 

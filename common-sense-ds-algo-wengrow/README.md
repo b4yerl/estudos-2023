@@ -5,3 +5,9 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Why Data Structures Matters?](./whyDsMatters.md)
 ## [Why Algorithms Matters?](./whyAlgosMatters.md)
 ## [O Yes! Big O Notation](./bigONotation.md)
+## [Speeding Up Your Code With Big O](./speedingUpWithBigO.md)
+
+<div align="center">
+  <br><br>
+  <img src="https://m.media-amazon.com/images/I/81yvVmN1BLL.jpg" height="300px">
+</div>

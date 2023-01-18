@@ -1,0 +1,15 @@
+{
+  "name": "fcc-timestamp-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": ["nodejs", "api", "javascript"],
+  "author": "Guilherme Bayerl",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

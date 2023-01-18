@@ -28,3 +28,21 @@ Com nossa tabela pronta podemos inserir dados com a seguinte query:
 > INSERT INTO 'nome_tabela' ('col1', 'col2') VALUES ('x', 'y');
 
 A parte de SELECT não vou trazer pra cá, tem lá no [Intro do SQL do Kaggle](../kaggle-sql/intro/), caso seja coisa nova eu boto aqui :)
+
+Para apagar uma tablea do nosso databse, basta usar o DROP TABLE seguido pelo nome da tabela.
+
+Assim como temos os comandos com TABLE podemos interagir com o DATABASE, por exemplo
+> ALTER DATABASE 'old' RENAME TO 'new';
+
+Temos aqui a opção o tipo SERIAL para os Ids. Isso indica que a coluna é um inteiro não nulo que deve ser incrementado por 1.
+
+Podemos atualizar os dados de uma tabela usando:
+> UPDATE 'tabela' SET 'coluna'='valorNovo' WHERE 'condição';
+
+Para adicionar uma PRIMARY KEY a uma tabela basta usar:
+> ALTER TABLE 'tabela' ADD PRIMARY KEY('coluna');
+
+Podemos também adicionar uma foreign key com:
+> ALTER TABLE 'tabela' ADD COLUMN 'nome' TYPE
+> REFERENCES 'outraTabela'('colunaQueAponta');
+

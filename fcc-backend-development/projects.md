@@ -32,3 +32,9 @@ Enfim o projeto consiste em desenvolver um sistema no qual usuários podem ser c
 - /api/users/:id/exercises >>> POST // Cadastra um novo exercício para o usuário indicado
 - /api/users/:id/logs >>> GET // Recupera os dados do usuário e todos os seus exercícios
 - /api/users/:id/exercises?[from][&to][limit] >>> GET // Podemos filtar os exercícios por um intervalor de datas e limitar o retorno.
+
+## [File Metadata Microservice](./projects/fileMetadata/app.js)
+
+Talvez o mais fácil e mais simples até agora, mas tudo graças ao multer. Basicamente realiza o POST do arquivo pelo formulário e retorna um JSON com algumas informações sobre o arquivo.
+
+Com isso acaba o curso e as minhas primeiras aplicações backend, bora pro próximo :)

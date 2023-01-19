@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css" type="text/css">
+  <title>Exercise Tracker</title>
+</head>
+<body>
+  <h1>Exercise Tracker</h1>
+  <br>
+  <h2>Criar novo user</h2>
+  <br>
+  <form action="/api/users" method="post">
+    <input type="text" name="username" placeholder="username">
+    <input type="submit" value="submit">
+  </form>
+  <br>
+  <h2>Cadastrar novo exercício para o usuário</h2>
+  <br>
+  <form onsubmit="changeFormAction()" method="post" id="exercises">
+    <input type="text" name="id" id="id" placeholder="id" required>
+    <input type="text" name="description" placeholder="description" required>
+    <input type="text" name="duration" placeholder="duration in mins" required>
+    <input type="text" name="date" placeholder="date: yyyy-mm-dd">
+    <input type="submit" value="Submit Exercise">
+  </form>
+  <br>
+  <ul>
+    <li>/api/users << POST >> Gera um novo usuário e devolve um JSON com username e id, guarde o id.</li>
+    <li><a href="/api/users/">/api/users</a> << GET >> Retorna um array com todos os usuários cadastrados</li>
+    <li>/api/users/:id/exercises/ << POST >> Gera um novo exercício atrelado a um determinado usuário</li>
+    <li>/api/users/:id/logs << GET >> Retorna um objeto com dados do usuário e todos os seus exercícios</li>
+    <li>/api/users/:id/logs?[from][to][limit] << GET >> Devolve os mesmos logs de cima, mas com os filtros indicados</li>
+  </ul>
+  <script>
+    function changeFormAction() {
+      let form = document.querySelector('#exercises')
+      let id = document.querySelector('#id');
+      form.action = `/api/users/${id.value}/exercises`
+    }
+  </script>
+</body>
+</html>

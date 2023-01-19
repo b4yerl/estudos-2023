@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+  <style>
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+  <div align="center">
+    <h1>URL Shortener</h1>
+    <p>Para utilizar esse serviço insira a URL a ser encurtada, copie o short_url e use-o</p>
+    <ul>
+      <li>/api/shorturl << Um POST aqui gera a URL curta</li>
+      <li>/api/shorturl/:shortId << No lugar do shortId, insira a versão curta da URL</li>
+    </ul>
+    <form action="/api/shorturl" method="post">
+      <input type="text" name="url">
+      <input type="submit" value="submit">
+    </form>
+  </div>
+</body>
+</html>

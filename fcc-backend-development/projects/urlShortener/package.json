@@ -1,0 +1,21 @@
+{
+  "name": "fcc-url-shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "microservices",
+    "javascript",
+    "express"
+  ],
+  "author": "Guilherme Bayerl",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4"
+  }
+}

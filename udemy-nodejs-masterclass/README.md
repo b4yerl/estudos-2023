@@ -10,6 +10,8 @@ Esse curso é um curso do [Brad Traversy](https://www.youtube.com/@TraversyMedia
 
 ## [HTTP Intro](./httpIntro.md)
 ## [Starting Our DevCamper Project](./startingOurProject.md)
+## [Getting Started with MongoDB and Bootcamps Resource](./startingMongoDB.md)
+## [Custom Error Handling and Mongoose Middleware](./errorHandling.md)
 
 <div align="center">
   <br><br>

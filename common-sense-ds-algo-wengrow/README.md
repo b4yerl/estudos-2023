@@ -6,6 +6,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Why Algorithms Matters?](./whyAlgosMatters.md)
 ## [O Yes! Big O Notation](./bigONotation.md)
 ## [Speeding Up Your Code With Big O](./speedingUpWithBigO.md)
+## [Optimizing Code With and Without Big O](./optimizingCode.md)
 
 <div align="center">
   <br><br>

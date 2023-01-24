@@ -6,6 +6,7 @@ Esse repositório tem como objetivo organizar os meus estudos durante 2023. Assi
 - ### [Javascript Algorithms and Data Structures - freeCodeCamp](./fcc-javascript-algorithms)
 - ### [Building Javascript Applications With Node.js - Microsoft Learn](./microsoft-javascript-node-applications/)
 - ### [Back End Development and APIs - freeCodeCamp](./fcc-backend-development)
+- ### [Node.js Masterclass with Express and MongoDB - Udemy](./udemy-nodejs-masterclass)
 - ### [Eloquent Javascript - Marijn Haverbeke](./eloquent-javascript-haverbeke)
 
 ## SQL e NoSQL

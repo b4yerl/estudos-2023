@@ -7,6 +7,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [O Yes! Big O Notation](./bigONotation.md)
 ## [Speeding Up Your Code With Big O](./speedingUpWithBigO.md)
 ## [Optimizing Code With and Without Big O](./optimizingCode.md)
+## [Optimizing for Optimistic Scenarios](./optimizingOptimistic.md)
 
 <div align="center">
   <br><br>

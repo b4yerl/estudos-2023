@@ -10,6 +10,7 @@ Este curso parte da navegação e manipulação de arquivos mais básica até sc
 
 ## [Learn Bash by Building a Boilerplate](./learnBash.md)
 ## [Learn Relational Databases by Building a Mario Database](./marioDatabase.md)
+## [Learn Bash Scripting by Building Five Programs](./bashScripting.md)
 
 <div align="center">
   <br><br>

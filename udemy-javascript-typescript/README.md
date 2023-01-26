@@ -16,3 +16,11 @@ O curso foi dividido em x módulos, tendo aproximadamente 140 horas de conteúdo
 ## [Javascript Funções](./javascript-funcoes/)
 ## [Javascript Arrays](./javascript-arrays/)
 ## [Javascript Objetos](./javascript-objetos/)
+## [Javascript Programação Orientada a Objetos](./javascript-poo/)
+
+<div align="center">
+  <br><br>
+  <img src="https://logodownload.org/wp-content/uploads/2022/04/javascript-logo-1.png" height="150px">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1200px-Typescript_logo_2020.svg.png" height="150px">
+</div>
+

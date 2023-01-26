@@ -8,6 +8,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Speeding Up Your Code With Big O](./speedingUpWithBigO.md)
 ## [Optimizing Code With and Without Big O](./optimizingCode.md)
 ## [Optimizing for Optimistic Scenarios](./optimizingOptimistic.md)
+## [Big O in Everyday Code](./everydayBigO.md)
 
 <div align="center">
   <br><br>

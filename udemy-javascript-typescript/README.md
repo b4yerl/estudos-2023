@@ -18,6 +18,7 @@ O curso foi dividido em x módulos, tendo aproximadamente 140 horas de conteúdo
 ## [Javascript Objetos](./javascript-objetos/)
 ## [Javascript Programação Orientada a Objetos](./javascript-poo/)
 ## [Javascript Assíncrono](./javascript-assincrono/)
+## [Javascript Tooling e ES6 Modules](./javascript-modulos/)
 
 <div align="center">
   <br><br>

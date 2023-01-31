@@ -5,6 +5,7 @@
 </div>
 
 ## [Get Started With Typescript](./getStarted.md)
+## [Declare variable types in TypeScript](./declareVariables.md)
 
 <div align="center">
   <br><br>

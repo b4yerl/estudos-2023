@@ -1,0 +1,17 @@
+{
+  "name": "microsoft-learn-typescript-exercises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "module01.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Guilherme Bayerl",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^4.9.5"
+  }
+}

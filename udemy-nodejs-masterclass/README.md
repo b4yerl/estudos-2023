@@ -13,6 +13,7 @@ Esse curso é um curso do [Brad Traversy](https://www.youtube.com/@TraversyMedia
 ## [Getting Started with MongoDB and Bootcamps Resource](./startingMongoDB.md)
 ## [Custom Error Handling and Mongoose Middleware](./errorHandling.md)
 ## [Mongoose Advanced Querying and Relantionships](./mongooseAdvanced.md)
+## [Authentication, User and Permissions - Part I](./authUser1.md)
 
 <div align="center">
   <br><br>

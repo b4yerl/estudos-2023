@@ -72,4 +72,6 @@ Entramos em uma nova categoria aqui e podemos entender como algo em O(2^N) conse
 
 1. Considerando o pior caso possível teríamos o retorno true, para isso acontecer teríamos que iterar por metade do array, ou seja N/2, sabendo que devemos desconsiderar constantes temos então O(N).
 2. Como estamos tratando de dois arrays aqui que podem ter tamanhos diferentes devemos considerar um sendo M e o outro N, como os dois serão iterados juntos em um mesmo loop temos N+M operações, considerando que isso não representa um crescimento exponencial podemos descrever como O(N), sendo N então a representação de todos os números presentes.
-3. Bom essa é um pouco mais complicada, temos novamente 2 datasets diferentes, dessa vez iremos com certeza iterar N vezes para cobrir todo o primeiro array. A pior situação possível seria algo como encontrar o alvo no final
+3. Bom essa é um pouco mais complicada, temos novamente 2 datasets diferentes, dessa vez iremos com certeza iterar N vezes para cobrir todo o primeiro array. A pior situação possível seria algo como percorrer o N, M vezes a provura do alvo, logo O(N * M)
+4. Meu deus, preciso nem olhar muito, O(N^3)........
+5. Lembra muito a ideia da Binary Search, que na verdade é a ide do O(logN) como um todo, se dobrarmos os dados, aumentamos 1 passo, portanto, O(logN)

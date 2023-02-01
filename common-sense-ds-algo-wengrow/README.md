@@ -11,6 +11,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Big O in Everyday Code](./everydayBigO.md)
 ## [Blazing Fast Lookup With Hash Tables](./hashTables.md)
 ## [Crafting Elegant Code With Stacks and Queues](./stacksQueues.md)
+## [Recursively Recurse With Recursion](./recursion.md)
 
 <div align="center">
   <br><br>

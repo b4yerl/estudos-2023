@@ -7,6 +7,7 @@
 ## [Get Started With Typescript](./getStarted.md)
 ## [Declare variable types in TypeScript](./declareVariables.md)
 ## [Implement interfaces in TypeScript](./interfaces.md)
+## [Develop typed functions by using TypeScript](functions.md)
 
 <div align="center">
   <br><br>

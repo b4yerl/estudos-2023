@@ -14,6 +14,7 @@ Esse curso é um curso do [Brad Traversy](https://www.youtube.com/@TraversyMedia
 ## [Custom Error Handling and Mongoose Middleware](./errorHandling.md)
 ## [Mongoose Advanced Querying and Relantionships](./mongooseAdvanced.md)
 ## [Authentication, User and Permissions - Part I](./authUser1.md)
+## [Authentication, User and Permissions - Part II](./authUser2.md)
 
 <div align="center">
   <br><br>

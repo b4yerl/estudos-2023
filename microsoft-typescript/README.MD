@@ -8,6 +8,7 @@
 ## [Declare variable types in TypeScript](./declareVariables.md)
 ## [Implement interfaces in TypeScript](./interfaces.md)
 ## [Develop typed functions by using TypeScript](functions.md)
+## [Declare and instantiate classes in TypeScript](./classes.md)
 
 <div align="center">
   <br><br>

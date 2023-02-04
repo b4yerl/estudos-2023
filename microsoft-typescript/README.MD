@@ -9,6 +9,7 @@
 ## [Implement interfaces in TypeScript](./interfaces.md)
 ## [Develop typed functions by using TypeScript](functions.md)
 ## [Declare and instantiate classes in TypeScript](./classes.md)
+## [Define generics in TypeScript](./generics.md)
 
 <div align="center">
   <br><br>

@@ -11,6 +11,7 @@
 ## [Declare and instantiate classes in TypeScript](./classes.md)
 ## [Define generics in TypeScript](./generics.md)
 ## [Access external libraries from TypeScript](./libraries.md)
+## [Organize code using TypeScript namespaces](./namespaces.md)
 
 <div align="center">
   <br><br>

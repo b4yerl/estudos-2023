@@ -10,6 +10,7 @@
 ## [Develop typed functions by using TypeScript](functions.md)
 ## [Declare and instantiate classes in TypeScript](./classes.md)
 ## [Define generics in TypeScript](./generics.md)
+## [Access external libraries from TypeScript](./libraries.md)
 
 <div align="center">
   <br><br>

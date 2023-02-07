@@ -2,7 +2,8 @@
 
 Assim como feito com outros livros, vou trazer aqui apenas infos complementares ao que eu já aprendi [neste curso](../microsoft-typescript/), então a parte mais básica provavelmente vai estar toda lá.
 
-## [The Type System](chapter2.md)
+## [The Type System](./chapter2.md)
+## [Unions and Literals](./chapter3.md)
 
 <div align="center">
   <br><br>

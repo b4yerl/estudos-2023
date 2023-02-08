@@ -13,6 +13,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Crafting Elegant Code With Stacks and Queues](./stacksQueues.md)
 ## [Recursively Recurse With Recursion](./recursion.md)
 ## [Learning to Write in Recursive](./writeRecursive.md)
+## [Dynamic Programming](./dynamic.md)
 
 <div align="center">
   <br><br>

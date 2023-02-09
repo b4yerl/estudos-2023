@@ -15,6 +15,7 @@ Esse curso é um curso do [Brad Traversy](https://www.youtube.com/@TraversyMedia
 ## [Mongoose Advanced Querying and Relantionships](./mongooseAdvanced.md)
 ## [Authentication, User and Permissions - Part I](./authUser1.md)
 ## [Authentication, User and Permissions - Part II](./authUser2.md)
+## [Bootcamp Reviews and Ratings](./reviews.md)
 
 <div align="center">
   <br><br>

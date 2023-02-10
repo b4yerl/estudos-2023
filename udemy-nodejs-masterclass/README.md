@@ -17,6 +17,7 @@ Esse curso é um curso do [Brad Traversy](https://www.youtube.com/@TraversyMedia
 ## [Authentication, User and Permissions - Part II](./authUser2.md)
 ## [Bootcamp Reviews and Ratings](./reviews.md)
 ## [API Security](./apiSecurity.md)
+## [Documentation and Deploy](./docsDeploy.md)
 
 <div align="center">
   <br><br>

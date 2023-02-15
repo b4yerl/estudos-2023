@@ -4,6 +4,7 @@ Assim como feito com outros livros, vou trazer aqui apenas infos complementares 
 
 ## [The Type System](./chapter2.md)
 ## [Unions and Literals](./chapter3.md)
+## [Objects](./chapter4.md)
 
 <div align="center">
   <br><br>

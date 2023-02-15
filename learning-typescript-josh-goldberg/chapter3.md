@@ -20,6 +20,4 @@ Podemos pensar em tipos primitivos como uma grande union de todos os literals po
 
 O Typescript possui diversas opções de configuração que podem ser alteradas para modificar o comportamento do type checking, do compiler, enfim, uma das opç~çoes que veremos agora é o `strictNullChecks`.
 
-O `strictNullChecks` quando desabilitado, basicamente adiciona `| null | undefined` em todos os tipos declarados, permitindo que qualquer variável receba `null`ou `undefined`. A boa prática aqui é manter o `strictNullChacks` ligado, mantendo também a segurança dos tipos e caso precisemos de um null, podemos simplesmente declarar isso nmo código.
-
-
+O `strictNullChecks` quando desabilitado, basicamente adiciona `| null | undefined` em todos os tipos declarados, permitindo que qualquer variável receba `null`ou `undefined`. A boa prática aqui é manter o `strictNullChacks` ligado, mantendo também a segurança dos tipos e caso precisemos de um null, podemos simplesmente declarar isso no código.

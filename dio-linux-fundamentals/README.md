@@ -9,6 +9,7 @@
 ## [Manipulando Arquivos](./manipulandoArquivos.md)
 ## [Gerenciando Usuários](./usuarios.md)
 ## [Gerenciamento de Pacotes e Discos](./pacotesDiscos.md)
+## [Serviços](./servicos.md)
 
 <div align="center">
   <br><br>

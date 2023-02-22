@@ -5,8 +5,11 @@
   <img src="https://hermes.digitalinnovation.one/assets/diome/logo.png" height="100px">
 </div>
 
-## [Introdução ao Sistema Operacional Linux](./introLinux)
+## [Introdução ao Sistema Operacional Linux](./introLinux.md)
 ## [Manipulando Arquivos](./manipulandoArquivos.md)
+## [Gerenciando Usuários](./usuarios.md)
+## [Gerenciamento de Pacotes e Discos](./pacotesDiscos.md)
+## [Serviços](./servicos.md)
 
 <div align="center">
   <br><br>

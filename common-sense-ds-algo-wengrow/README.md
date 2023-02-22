@@ -14,6 +14,7 @@ Bom, aqui nesse livro eu vou começar a aprofundar os meus estudos em algoritmos
 ## [Recursively Recurse With Recursion](./recursion.md)
 ## [Learning to Write in Recursive](./writeRecursive.md)
 ## [Dynamic Programming](./dynamic.md)
+## [Recursive Algorithms for Speed](./recursiveSpeed.md)
 
 <div align="center">
   <br><br>

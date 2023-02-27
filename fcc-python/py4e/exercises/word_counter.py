@@ -24,6 +24,11 @@ def word_counter():
        if most_common_count is None or count > most_common_count:
           most_common = word
           most_common_count = count
-    print(most_common, most_common_count)
+    print(f'The most common word is: {most_common}')
+
+    # Find the top 10 most used words
+    print('The top 10 most used words were:')
+
+    print(sorted([(v,k) for k,v in counter.items()][:10], reverse=True))
         
 word_counter()

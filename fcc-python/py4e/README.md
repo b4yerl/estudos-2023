@@ -4,3 +4,4 @@
 ## [Files](./files.md)
 ## [Lists](./lists.md)
 ## [Dictonaries](./dict.md)
+## [Tuples](./tuples.md)

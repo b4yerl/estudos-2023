@@ -5,3 +5,4 @@
 ## [Lists](./lists.md)
 ## [Dictonaries](./dict.md)
 ## [Tuples](./tuples.md)
+## [Networking](./networking.md)

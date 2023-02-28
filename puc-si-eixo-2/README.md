@@ -1,6 +1,7 @@
 # PUC Minas Virtual - Sistemas de Informação - Eixo 2
 
 ## [Fundamentos de Sistemas de Informação](./fundamentosSI.md)
+## [Modelagem de Dados](./modelagemDados.md)
 
 <div align="center">
   <br><br>

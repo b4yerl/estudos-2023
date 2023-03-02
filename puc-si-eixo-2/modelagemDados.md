@@ -113,3 +113,128 @@ Alguns conceitos importantes para aprofundar-mos no MER
 A disjunção representa o OU exclusivo (XOR), aqui cada entidade do supertipo pode pertencer no máximo a um subtipo de especialização. Ao contrário disso a sobreposição representa o OU inclusivo (OR), ou seja, cada entidade do supertipo pode pertencer a mais de um subtipo.
 
 Quanto à questão da completude representa se o supertipo deve obrigatoriamente pertencer a um subtipo ou se ela pode existir por conta própria, isso é representado pela linha simples ou pela linha dupla ligando o supertipo ao indicador de  disjunção.
+
+## Unidade II
+
+### Modelo Relacional de Banco de Dados
+
+O modelo relacional é um teoria implementada pelos DMBS ditos relacionais à sua maneira. O banco de dados aqui é entendido como um conjunto de relações (tabelas), sendo que a relação é uma tabela de valores, na qual cada linha representa uma coleção de dados relacoinasdos.
+
+**Domínio** é um ocnjunto de valores válidos de um atributo. É um conceito lógico que se sobrepõe ao tipo físico do atributo, é então, um conceito lógico e tipo de campo um conceito físico.(enum?)
+
+Chaves candidatas são atributos ou um conjunto deles que definem unicamente e minimamente cada tupla da relação. Já a **Chave primária** é uma coluna ou combinação de colunas cujos valores distinguem uma linha das demais dentro de uma tabela. Também existe o conceito de Chave alterenativa (unique key - UQ), são basicamente as candidatas derrotadas pra eleição de PK.
+
+As **tuplas** são as linhas de uma relação que precisam ser distintas. Note que a ordem nas quais as colunas são ordenadas não fazem diferença para a tupla.
+
+A quantidade de atributos/colunas, define o grau da relação/tabela. Os valores do atributo são atômicos, ou seja, uma interseção linha x coluna, só pode resultar em um único valor. Para atributos multivalorados temos que tomar outros caminhos para solucionar essa questão, isso será abordado mais a frente.
+
+A **chave estrangeira** FK, é a implementação física de um relacionamento do M.E.R. em um DB relacional, tendo ela as seguintes condições:
+- A FK deve possuir o mesmo domínio (tipo de dados) da PK.
+- Um valor de FK deve referenciar um valor válido de PK (t1[FK] = t2[PK]) ou pode ser nulo.
+
+As **restrições de integridade** não devem ser violadas em operações de atualização do DB:
+- **Integridade de Domínio**: O valor de um campo deve obedecer a definição de valores admitidos para a coluna.
+- **Integridade de Entidade**: nenhum componente de uma PK pode ser nulo
+- **Integridade de Chave**: não são admitidos valores repetidos da PK.
+- **Integridade Referencial**: FK é um valor válido de PK ou é nula.
+
+Enquanto as entidade do MER viram as tabelas, os relacionamentos são apresentados no formato de FK.
+
+A exclusão de uma tupla pode ser bloqueada para evitar a violação da integridade referencial, por exemplo um departamento com 20 pessoas apontando pra ele, pode ter sua remoção do sistema bloqueada por uma restrição.
+
+Podemos nessas situações configurar alguns triggers:
+- `ON DELETE SET NULL` faz com que ao ter o departamento apagado, o empregado nele lotado passe a ter a FK definida como null.
+- `ON DELETE SET DEFAULT` neste caso a FK já seria alterada para o valor padrão definido.
+- `ON DELETE CASCADE` isso gera a remoção em cascata, varrendo os funcionários junto com o departamento.
+
+Também temos a possibilidade de configurar esses triggers com o `ON UPDATE`.
+
+### Mapeamento do M.E.R. para o Modelo Relacional
+
+**Mapeamento de Entidade Regular**
+- Para cada entidade forte criar uma tabela com todos os atribuos da entidade (atributos simples e componentes simples de um atributo composto).
+- Escolher um ou mais atributos para ser a PK.
+
+**Mapeamento de Atributos Multivalorados**
+- Criar uma tablea para um atributo multivalorado A.
+- Incluir na tabela o atributo A.
+- Incluir a PK da entidade que tem A como atributo como a FK da tabela.
+- A PK desta tabela será formada pela combinação de A com sua FK.
+
+**Mapeamento de Entidade Fraca**
+- Para cada entidade fraca que se liga a uma entidade forte, criar uma tabela que inclua todos os seus atributos.
+- Incluir como atributos de FK os atributos PK da entidade proprietária.
+- A PK desta tabela deverá ser a combinação da chave parcial da tabela fraca com a PK da tabela proprietária.
+- Usualmente temos o efeito cascata associado a essa relação.
+
+**Mapeamento de Relacionamentos**
+- Para um relacionamento binério 1:1 entre entidades, escolhe-se usualmente uma das tabelas e inclui-se como chave estrangeira a chave primária da outra.
+- Para um relacionamento binário regular (sem a presença de entidades fracs) 1:N, identifica-se a tabela da entidade no lado N do relacionamento e inclui-se nesta a PK da outra tabela como FK.
+- Para relacionamentos N:N, deve-se crar uma nova tabela para representar o relacionamento, inclui-se como FK as PK das tabelas relacionadas e define como PK a cpmbinação de ambas, neste caso inclui-se também os atributos da relação na nova tabela.
+- Em um relacionamento N-ário (terciário por exemplo) seguimos a mesma ideia no N:N, criamos uma nova tabela com FKs referenciando as entidades relacionadas e uma PK composta pelas N FKs. Da mesma maneira incluímos também os atributos da relação na nova tabela.
+
+Para a questão de supertipos e subtipos, entenda que o modelo relacional não implementa nativamente a ideia de herança, ao contrário do banco orientado a objetos, logo faz-se necessário também o mapeamento aqui. Temos 3 opções clássicas aqui.
+- Opção 1: Tabela única para o supertipo que absorve todos os atributps possíveis dos subtipos, incluindo uma flag para indicar a qual tipo aquela tupla se trata.
+- Opção 2: Tabelas separadas representando os subtipos, nesses casos não temos o supertipos, a solução é rebater os atributos para as N novas tabelas.
+- Opção 3: Tabelas representando cada entidade, nessa situação os subtipos carregam como FK a referência ao seu Supertipo.
+
+### Normalização de Banco de Dados
+
+Normalização é um rocesso para avaliar e corrigir estruturas e tabelas de modo a minimizar as redundÇancias de dados, reduzindo assim a probabilidade de anomailas.
+
+Entenda como um conjunto de testes feitos nos modelos relacionais para verificar se eles estão de acordo com as propriedades fundamentais do modelo.
+
+**1ª forma normal**
+- Um esquema de relação está na primeira forma normal se todos os seus atributos forem atômicos.
+- Impedimento para a criaçlão de atributos multivalorados ou grupos repetitivos.
+- Cada linha tendo sua PK
+- Linhas distintas entre si não havendo PK repetida.
+
+Quanto a depêndencia funbcional: Se conhecermos o valor de um atributo X, sabemos o valor do Y associados, logo Y é funcionalemnte dependete de X, X determina Y.
+
+**2ª forma normal**
+A segunda forma normal aplica-se somente às relações em que temos uma PK composta. Caso tenhamos uma relação já na 1FN e sua PK é formada apenas por um atributo, ela então já atende a 2FN.
+
+- Analisa se algum atributo possui dependência parcial da PK
+- Uma relação encontra-se na 2FN se e somente se estiver na 1FN e não contiver dependências parciais
+
+Traduzindo para a linguagem de ós meros humanos. Imagine uma tabela Pedido_Produto que tenha o número do pedido, o código do produto e o nome do produto. Como o nome do produto não é uma informação que dependa dessa união, ele já está ligado ao código do produto, logo isso indica uma dependência parcial, sendo assim nossa tabeça não estaria na 2FN. Um outro exemplo seria Funcionario_Projeto com o CPF e o código do projeto, as horas trabalhadas dependem totalmente dessa relação, diferentemente do nome do funcionário que no caso depende apenas do CPF.
+
+**3ª forma normal**
+Um esquema de relação está na 3FN se estiver na 2FN e nenhum atributo não pertencente a uma chave for transitivamente dependente da PK. Dependência transitiva ocorre quando uma coluna depende de outra, ou de um conjunto de outras colunas, que não seja a PK.
+
+*Todos os atributos que não pertencem à PK dependem exclusivamente da PK.*
+
+## Modelagem de Dados em Bancos Não-Relacionais
+
+Antes de entrarmos de verdade nos Não-Relacionais vamos ao conceito de modelo de dados:
+> Modelo de dados é uma coleção de ferramentas conceituais para descrição do sdados, seus relacionamentos, suas restrições de consistência e semântica.
+> Um DBMS deve suportar um modelo de dados
+
+Os bancos No-SQL surgem em um cenário de grande volume de dados não estruturados demandados por aplicações web, sua arquitetura favorece o escaçonamento de máquinas distribuídas na nuvem e replicação. Muito usados também para aplicações de Big Data.
+
+Dentro dos bancos No-SQL temos opções baseadas em colunas, grafos, documentos, key-value etc. Um Sistema key-value é um sistema que fornece uma maneira de armazenar ou atualiazr um registro com uma chave associada e recuperar o registro a partir dessa chave.
+
+Alguns exemplos de DBMS NoSQL:
+- **Key-Value**: RocksDB, Aerospike, redis
+- **Documento**: mongoDB, Couchbase
+- **Coluna**: Google Big Table, Cassandra, amazon DynamoDB, Apache HBase
+- **Grafo**: JanusGraph, neo4j
+
+No modelo de documentos os registros não precisam ter uma estrutura uniforma. Registros distintos podem ter coleções de atributos diferentes. É possivel armazenar mais um valor em um mesmo atributo (multivalorado) em formato de array. Registros podem sguir uma estrutura aninhada.
+
+No modelo de colunas, muito usado em redes sociais, temos familias de colunas em que cada familia podem haver varias colunas, tendo armazenadas seus pares key-value, aqui temos uma Tripla, a linha, a coluna e o timestamp.
+
+Em grafos, grafos são utilizados para representar dados e as ligações representam as associações entre estes dados. NO caso os atributos aqui são essas relações.
+
+### Segurança
+
+Existem vários conceitos associados à segurança de um DB. O **sigilo** deve assegurar que as informações nao devem ser reveladas para usuários não autorizados. A **integridade** garante que os dados devem estar protegiso contra qualquer alteração imprópria. Por outro lado, a **disponibilidade** diz que os dados estarão disponíveis aos usuários e sistemas que estão autorizados a acessálos no momento em que forem acessados.
+
+Pelo valor que os dados representam hoje, no Brasil temos a LGPD, lei 13709 de 14/8/2018, trazendo regras para o tratamento de dados pessoais, proteção a privacidade. Temos coisas como o direito de esquecer, a inviolabilidade da intimidade, da honera e da imagem.
+
+Toda a questão deve estar integrada na política de segurança do DB dentro da organização, tanto do ponto de vista lógico quanto do físico (servidores). Dentro do controle de acesso temos 2 tipos principais, o **controle de acesso discricionário** trata da autorização e revogação de privilégios para users, grupos e papeis. No SQL essa é a DCL (Data Control Language) com os comandos `GRANT` e `REVOKE`. O outro tipo é o **controle de acesso obrigatório** baseado em políticas em nível de sistema que não podem ser alteradas por usuários individuais, logo algo mais sofisticado.
+
+Tempos outros tópicos na segurança como a criptografia, assinaturas e certificados digitais, tendo o papel central do DBA na averiguação da seguranla do DB. As trilhas (log) de auditoria em DB são muito outilizadas pelos DBAs como ferramenta de averiguação, sabendo quem fez o que no DB.
+
+Note que para algumas coisas o padrão SQL atual não consegue cobrir, por isso a importância da integração da segurança com a camada de aplicação para limitar ações indesejadas.

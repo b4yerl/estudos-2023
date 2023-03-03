@@ -2,6 +2,7 @@
 
 ## [Fundamentos de Sistemas de Informação](./fundamentosSI.md)
 ## [Modelagem de Dados](./modelagemDados.md)
+## [Bancos de Dados NoSQL](./nosql.md)
 
 <div align="center">
   <br><br>

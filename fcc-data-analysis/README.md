@@ -2,3 +2,4 @@
 
 ## [Intro to Data Analysis](./intro.md)
 ## [NumPy I](./numpy1.md)
+## [Pandas](./pandas.md)

@@ -68,7 +68,7 @@ Nativamente no numpy podemos executar uma série de operações nos nossos array
 
 ## Numpy Operations
 
-Vamos agora para o broadcasting e operações vetorizadas, começando pela compreensão do comando `np.arrange(n)` que retorna uma array com os elementos equivalentes ao `range(n)`, ou seja:
+Vamos agora para o broadcasting e operações vetorizadas, começando pela compreensão do comando `np.arange(n)` que retorna uma array com os elementos equivalentes ao `range(n)`, ou seja:
 ```py
 A = np.arrange(5)
 print(A) # 0 1 2 3 4

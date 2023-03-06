@@ -102,3 +102,71 @@ Para este problema de escalabilidade na escrita e a falta de resiliência em cas
 #### Sharding + Replication
 
 Para balancear a resiliência da replicação com a eficiência do sharding, uma escolha é a adoçao de um modelo híbrido. A combinação do sharding com o peer-to-peer é muito comum em bancos orientados por colunas, a combinação entre sharding e o modelo master-slave é a mais comum para os bancos orientados a documentos ou chave-valor.
+
+## Unidade II
+
+### Modelos de Dados NoSQL
+
+#### Tabular
+
+Sistemas de banco de dados relacionais se tornarem muito popularaes a partir da década de 1980 e ainda são amplamente utilizados devido à sua robustez e confiabilidade para armazenamento de grande quantidade de dados.
+
+Uma característica dos bancos relacionais é que o esquema de dados, deve ser definido previamente, sendo que todos os dados devem ser armazenados seguindo-o.
+
+Apesar do armazenamento persistente, integradom com controle de concorrência de transações e de redundância, problemas de impedânci e de escalabilidade se tornaram limitadores para a adoção de bancos relacionais em aplicações modernas. Além disso a escalabilidade vertical na qual esses sitemas se baseiasm é limitada, cara e complexa.
+
+#### Chave-Valor
+
+No modelo chave-valor os dados são armazenados nesses pares no qual a chave serve como identificador exclusivo de seu valor, sendo que tanto a chave quanto os valores podem ser especificados como qualquer tipo de dado. Esse tipo de DB é altamente particionável e permite a escalabilidade horizontal.
+
+O modelo chave-valor oferece a simplicidade e a flexibilidade na organização de dados, bem como pode ser implementado de fomra muito eficiente, utilizando por exemplo hash functions em memória. Com isso esse modelo oferece baixa latência, sendo muito efetivo para armazenamento de dados simples e de natureza transitória.
+
+#### Coluna
+
+Pode-se considerar orientado a coluna como uma especializaçlão do modelo key-bvalue, uma vez que ambos provêm uma estrutur composta por pares cheve-valor. Note que o modelo de coluna o valor armazenado consiste em uma estrutura específica denominada família de coluna. Particulamente o modelo de coluna permite o armazenamento como um conjunto de pares key-value, em que uma chave (row-key) é o identificador exclusivo e uma família de coluna (column-family) é um agregao de colunas, cada uma composta por um par ky-value.
+
+#### Documento
+
+O modelo baseado em documentos traz uma estrutura complexa de documentos semiestruturados para organização dos dados no banco. Podendo ser implementado de forma muito eficiente com estruturas hierárquicas de árvore, os bancos de documentos são muito efetivos para o armazenamteno de agregados complexos e de natureza permanente.
+
+#### Grafo
+
+Bancos baseados em grafos usam sua estrutura baseados em vértices (nós) e arestas (ligações) que ligam os vértices. O modelo de grafo permite o armaenamento de relações complexas sob a forma de um grafo, facilitando o armazenamento e a navegação por dados e relacionamentos complexos.
+
+Nessa estrutura uma aresta sempre está relacionmada a um vértice inicial e um final e poussui um tipo e um direcionamento, o que possibilita a descrição de relacionamentos. A quantidade e os tipos de relacionamentos que um vértice pode apresentar são ilimitados.
+
+Diferentemente de outros modelos, que estabelecem vínculos entre os dados no momento da consulta, aqui os vínculo são preestabelecidos e persistentes, o que faz com que a busca por relacionamentos seja muito efetiva.
+
+### Sitemas de Banco de Dados NoSQL
+
+#### Cassandra
+
+O Apache Cassandra é um DBMS orientado a colunas que provê uma solução de armazenamento de dados distribuída resiliente e e de alto desempenho, privilegiando os aspectos de disponibilidade e tolerância de partição.
+
+Como distribuída entende-se que a solução Cassandra pode ser executada em várias máquinas, com os nós em uma arquitetura peer-to-peer.
+
+COm a ideia de fator de replicaçõa, o Cassandra garante a confiabilidade e a tolerância a falhas replicandos uma parte dos dados em um número x de nós.
+
+#### MongoDB
+
+Sendo orientado a documentos, o MongoDB, em sua versão paga, provê uma solução de armazenamento distribuída, resiliente e de alto desempenho, privilegiando a disponibilidade e a tolerância de partição no teorema CAP.
+
+Aqui os nós encontram-se em uma arquitetura master-slave, o que confere à solução alto-desempenho, especialmente para a leitura de dados, e tolerância a falhas derivada do mecanismo de replicação.
+
+Com a replicação assíncrona aliada a fragmentação de dados, esta solução torna-se ainda mais eficiente, provendo baixa latência e alto desempenho. Um diferencial é que o particionamento de dados entre nós não é definido por hash functions, mas sim por shard keys, ou chunks de atributos indexados.
+
+#### Neo4J
+
+Sendo um DBMS orientados a grafos, o Neo4j provê uma solução nativa de dados compatível com as propriedades ACID e de alto desempenho, privilegiando a consistência e a disponibilidade no CAP.
+
+Para atingir a escalabilidade horizontal, o Neo4j oferece recursos de replicação e fragmentação baseados em uma arquitetura mestr-escravo.
+
+#### Redis
+
+O Redis é um DBMS de código aberto baseado no modelo chave-valor que provê uma solução de armazenamento de dados in-memory com diferentes níveis de persistência. Se trata de uma solução distribuída, resiliente e de alto desempenho que privilegia a disponibilidade e a tolerância de partição.
+
+Configurados em uma arquitetura mestre-escravo, os nós Redis conferem à solução uma baixa latência e um alto desempenho, especialmente no modo de comunicação assíncrona. Para garantir a disponibilidade, o recurso Redis Sentinel faz o monitoramento, a notificação e a recuperalçao automática em caso de flhas a partir da promoção de um escravo para nó mestre.
+
+Com o Redis Cluster temos a fragmentação sendo feita a partir de um mecanismo denominado hash slot. Outro aspecto importante é que assim como no MongDB, o Redis tem a implementação do conceito de transação que possibilita a execução de um grupo de operações de leitura como um unico bloco lógico de execução, o que assim como em bancos relacionais, demanda mecanismos de controle de concorrÇencia de transação.
+
+Com esses recursos, o Redis é uma boa opção para cache, message broker e armazenamento transiotório de grandes volumes de dados agregados.

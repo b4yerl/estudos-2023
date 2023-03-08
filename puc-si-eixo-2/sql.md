@@ -120,3 +120,44 @@ As subqueries que retornam um valor único (escalar) podem ser comparadas com qu
 Temos basicamente dois tipos de subqueries:
 - **Sem correlação**: Essas subqueries podem ser executadas sozinhas sem nenhum problema, pois não dependem de referências a colunas externas.
 - **COm correlação**: Quando uma condição no `WHERE` da subquery referencia alguma coluna externa.
+
+## Unidade III
+
+### Transações e Propriedades ACID
+
+A manipulação de dados, nam maioria das vezes, ocorre em ambientes com vários usuários. Esse contexto de várias operações ocorrendo ao mesmo tempo, caracteriza uma concorrência pelo uso de recursos computacionais que devem garantir a confiança de que os dados informados a uma aplicação sejam gravados corretamente ou que a consulta se apresente de forma adequada.
+
+Assim nos DBMS, cabe ao Gerenciador de Transações a tarefa de gerenciar a sequência de operações de entrada e saída de dados nos vários bancos por ele controlados. E estas operações fazem parte de transações.
+
+Uma transação é um unidade lógica de trabalho ou um programa em execução que forma uma unidade lógica de processamento de banco de dados. Ela inclui uma ou mais operalçies de acesso ao banco. Ou seja, uma transação é composta por um conjunto de comandos SQL, coerentes com uma situação de negócio.
+
+Uma transação somente será concluída, se as operações que a compões forem bem sucedidas. Caso alguma operação falhe, a transação também não será bem sucedida, pois esta é indivisível.
+
+Em um DBMS, o que delimita os limites de uma transação são os comandos `BEGIN TRANSACTION` e `COMMIT` ou `ROLLBACK`. Além destes temos a possibilidade de desvio de fluxo dentro da transaction com `IF` - `THEN GO TO` - `END IF`, essa sequência pode mandar o fluxo para o block `UNDO`, onde mora o `ROLLBACK`.
+
+Quando se considera o ambiente multiusuário, independente da ocorrência de falhas, as transações devem ser gerenciadas para evitar que as aplicações acessem dados desatualizados. Para garantir um ambiente transacional seguro, os DBMS devem incorporar propriedades desejáveis em suas transações. Estas propriesdades são conhecidas como **ACID**:
+- **Atomicidade**: Uma transação deve ser realizada em sua totalidade ou não ser realizada de forma alguma.
+- **Consistência**: Uma transalçai de preservar a consistência. Ou seja, se a execução de uma transação for executada, sem a interferência de outras transaçoes, ela deve levar o banco de um estado consistente para outro.
+- **Isolamento**: Uma transação deve ser executada separademente de outras transaões. Mesmo sendo executadas simultaneamente.
+- **Durabilidade**: Mudanças efetivadas em um banco de dados, devido à confirmação da execução bem sucedida de uma trasnsação, devem persisteir no banco de dados.
+
+### Segurança
+
+A manipulação dos dados não deve ser permitida a qualquer pessoa, a depender da natureza do dado, somente algumas pessoas devem ter acesso a ele. As ameaças a um banco de dados podem resultar em:
+1. Perda de Integridade
+2. Perda de disponibilidade
+3. Perda de confidencialidade
+
+Para evitar esses problemas temos a DCL, principalmente ao redor de dois comandos.
+
+Começando pelo `GRANT` que concede os privilégios a um usuário, esses privilégios tratam dos comandos básicos DML: `SELECT`, `INSERT`, `UPDATE` e `DELETE`. Para englobar todos essas autorizações podemos usar o `ALL`. Note também que devemos informar a quem essa autorização está sendo concedida, podendo ser um usuário específico, um grupo de usuários ou simplesmente todos o usuários, nesse caso usamos `PUBLIC`.
+```sql
+GRANT ALL ON Nome_Tabela TO PUBLIC;
+```
+
+Por último o `REVOKE` para revogar os privilégios concedidos, nesse caso a sintaxe é a mesma:
+```sql
+REVOKE ALL ON Nome_Tabel FROM PUBLIC;
+```
+
+Note que existem outros privilégios podendo apontar para outros objetos, mas estes não serão abordados aqui.

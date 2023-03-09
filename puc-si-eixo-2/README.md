@@ -4,6 +4,7 @@
 ## [Modelagem de Dados](./modelagemDados.md)
 ## [Bancos de Dados NoSQL](./nosql.md)
 ## [Manipulação de Dados com SQL](./sql.md)
+## [Estatística Descritiva](./estatistica.md)
 
 <div align="center">
   <br><br>

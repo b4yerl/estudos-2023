@@ -1,0 +1,3 @@
+# Introdução a Banco de Dados NoSQL
+
+Então bascicamente esse módulo trazia uma introdução aos bancos de dados não relacionais, focando principalmente no MongoDB. O ponto é que durante o estudo para o concurso do BB e no último semestre da faculdade eu vi bastante essa parte de NoSQL, no projeto do express-task-list eu utilizei o MongoDB Atlas com o Mongoose para a persistência de dados. A coisa mais diferente do curso ficou pra uma introdução ao Redis, que eu também já tinha visto previamente na faculdade, logo decidi pular essa parte, indo direto à verificação de conhecimento presente ao final de cada curso. :)

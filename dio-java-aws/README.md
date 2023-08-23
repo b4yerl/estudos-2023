@@ -1,4 +1,4 @@
-# Desenvolvedor Java com AWS - dio
+# Desenvolvedor Java com Cloud AWS - dio
 
 <div align="center">
   <br><br>
